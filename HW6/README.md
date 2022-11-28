@@ -8,7 +8,7 @@ git clone https://github.com/alinajuly/RubyHW.git
 ```
 
 ```ruby
-cd RubyHW/HW5
+cd RubyHW/HW6
 ````
 
 ```ruby
