@@ -3,20 +3,37 @@
 ## How to use
 Type in console:
 
-```git clone https://github.com/alinajuly/RubyHW.git```
+```ruby
+git clone https://github.com/alinajuly/RubyHW.git
+```
 
-```gem install bundler```
+```ruby
+cd RubyHW/HW5
+````
 
-```bundle install```
+```ruby
+gem install bundler
+```
+```ruby
+bundle install
+```
 
 Attach ```config/database.yml``` with changes in database name
 
 Type in console:
 
-```rails db:create```
+```ruby
+rails db:create
+```
 
-```rails db:migrate```
+```ruby
+rails db:migrate
+```
 
-```rails db:seed```
+```ruby
+rails db:seed
+```
 
-```rails s```
+```ruby
+rails s
+```

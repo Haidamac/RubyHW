@@ -1,24 +1,49 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to use
+Type in console:
 
-Things you may want to cover:
+```ruby
+git clone https://github.com/alinajuly/RubyHW.git
+```
 
-* Ruby version
+```ruby
+cd RubyHW/HW5
+````
 
-* System dependencies
+```ruby
+gem install bundler
+```
+```ruby
+bundle install
+```
 
-* Configuration
+Attach ```config/database.yml``` with changes in database name
 
-* Database creation
+Type in console:
 
-* Database initialization
+```ruby
+rails db:create
+```
 
-* How to run the test suite
+```ruby
+rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```ruby
+rails db:seed
+```
 
-* Deployment instructions
+```ruby
+rails s
+```
 
-* ...
+## Tests in Postman
+
+![](/home/haidamac/Ruby/HW/HW5/get.png)
+
+![](/home/haidamac/Ruby/HW/HW5/post.png)
+
+![](/home/haidamac/Ruby/HW/HW5/patch.png)
+
+![](/home/haidamac/Ruby/HW/HW5/delete.png)
