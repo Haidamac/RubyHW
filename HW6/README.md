@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to use
+Type in console:
 
-Things you may want to cover:
+```git clone https://github.com/alinajuly/RubyHW.git```
 
-* Ruby version
+```gem install bundler```
 
-* System dependencies
+```bundle install```
 
-* Configuration
+Attach ```config/database.yml``` with changes in database name
 
-* Database creation
+Type in console:
 
-* Database initialization
+```rails db:create```
 
-* How to run the test suite
+```rails db:migrate```
 
-* Services (job queues, cache servers, search engines, etc.)
+```rails db:seed```
 
-* Deployment instructions
-
-* ...
+```rails s```
