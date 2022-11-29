@@ -43,6 +43,9 @@ rails s
 ### GET article with comments
 ![hw6_get](https://user-images.githubusercontent.com/113309864/204479150-e76df064-a45d-4b95-9e17-72d8df568798.png)
 
+### GET published comments only
+![hw6_get_published](https://user-images.githubusercontent.com/113309864/204493236-cbd41f53-4cb3-43df-9df4-d5f2f179863f.png)
+
 ### POST comment
 ![hw6_post](https://user-images.githubusercontent.com/113309864/204479309-142bb0a6-9704-47ac-b01a-f6412f406768.png)
 
