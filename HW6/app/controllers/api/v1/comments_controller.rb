@@ -3,9 +3,9 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_article
   before_action :set_comment, only: %i[show update destroy]
 
-  def index
-    if @article.comments.status.key.include?(params[:status])
-      @comment_status = @article.comments.with_status(params[:status])
+   def index
+    if @article.comments.include?(params[:status])
+      @comment_status = @article.comments.where(params[:status])
       render json: @comment_status
     else
       render json: @article.comments.all
@@ -64,14 +64,18 @@ class Api::V1::CommentsController < ApplicationController
       return render json: { message: 'resource id not found' }, status: :not_found
   end
 
+  def person_params
+    params.require(:comments).permit(:body, :status, :author_id)
+  end
+
   def comment_params
     params.require(:comment).permit(:body, :author_id)
   end
 
   def status_params
-    sp = params.require(:comment).permit(:status)
-    sp[:status] = params[:status].to_i
-    return sp
+    params.require(:comment).permit(:status)
+    # sp[:status] = params[:status].to_i
+    # return sp
   end
 
 end
