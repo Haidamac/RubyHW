@@ -37,3 +37,22 @@ rails db:seed
 ```ruby
 rails s
 ```
+
+## Tests in Postman
+
+### GET article with comments
+![](/home/haidamac/Pictures/hw6_get.png)
+
+### POST comment
+![](/home/haidamac/Pictures/hw6_post.png)
+
+### POST comment with missing author
+![](/home/haidamac/Pictures/hw6_post_missing_author.png)
+
+### Change comment status
+![](/home/haidamac/Pictures/hw6_patch.png)
+
+### Delete comment
+![](/home/haidamac/Pictures/hw6_delete.png)
+
+
