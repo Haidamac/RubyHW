@@ -40,10 +40,10 @@ rails s
 
 ## Tests in Postman
 
-![](/home/haidamac/Ruby/HW/HW5/get.png)
+![get](https://user-images.githubusercontent.com/113309864/204480353-1ba60dbf-4f8f-4e60-9667-a2d3a8d52d3c.png)
 
-![](/home/haidamac/Ruby/HW/HW5/post.png)
+![post](https://user-images.githubusercontent.com/113309864/204480480-0942edbf-1e34-4329-bdd3-119cc83e0f9d.png)
 
-![](/home/haidamac/Ruby/HW/HW5/patch.png)
+![patch](https://user-images.githubusercontent.com/113309864/204480533-14db780f-f616-43a7-b93b-34fb3c26573d.png)
 
-![](/home/haidamac/Ruby/HW/HW5/delete.png)
+![delete](https://user-images.githubusercontent.com/113309864/204480631-df88d9f3-c388-4559-a7e0-c90afb049b97.png)
