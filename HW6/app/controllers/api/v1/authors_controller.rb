@@ -1,5 +1,5 @@
 class Api::V1::AuthorsController < ApplicationController
-  before_action :set_author, only: %i[show, destroy]
+  #before_action :set_author, only: %i[show, destroy]
 
   def index
     @authors = Author.all
@@ -7,6 +7,7 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def show
+    @author = Author.find(params[:id])
     render json: { data: @author }, status: :ok
   end
 
@@ -16,6 +17,7 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def destroy
+    @author = Author.find(params[:id])
     if @author.destroy!
       render json: { status: "Delete" }, status: :ok
     else
@@ -23,13 +25,13 @@ class Api::V1::AuthorsController < ApplicationController
     end
   end
 
-  private
-
-  def set_author
-    @author = Author.find(params[:id])
-  end
-
-  def author_params
-    params.permit(:name)
-  end
+#   private
+#
+#   def set_author
+#     @author = Author.find(params[:id])
+#   end
+#
+#   def author_params
+#     params.permit(:name)
+#   end
 end
