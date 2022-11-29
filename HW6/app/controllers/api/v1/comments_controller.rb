@@ -4,13 +4,13 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: %i[show update destroy]
 
    def index
-    if @article.comments.include?(params[:status])
-      @comment_status = @article.comments.where(params[:status])
-      render json: @comment_status
-    else
-      render json: @article.comments.all
-    end
-  end
+     if status_params.include?(:status)
+       @comment_status = @article.comments.where(status_params)
+       render json: @comment_status
+     else
+       render json: @article.comments.all
+     end
+   end
 
   def show
     render json: @comment, status: :ok
