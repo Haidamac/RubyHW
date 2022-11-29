@@ -41,18 +41,18 @@ rails s
 ## Tests in Postman
 
 ### GET article with comments
-![](/home/haidamac/Pictures/hw6_get.png)
+![hw6_get](https://user-images.githubusercontent.com/113309864/204479150-e76df064-a45d-4b95-9e17-72d8df568798.png)
 
 ### POST comment
-![](/home/haidamac/Pictures/hw6_post.png)
+![hw6_post](https://user-images.githubusercontent.com/113309864/204479309-142bb0a6-9704-47ac-b01a-f6412f406768.png)
 
 ### POST comment with missing author
-![](/home/haidamac/Pictures/hw6_post_missing_author.png)
+![hw6_post_missing_author](https://user-images.githubusercontent.com/113309864/204479402-856f5eac-4509-465b-a303-71ac829dee54.png)
 
 ### Change comment status
-![](/home/haidamac/Pictures/hw6_patch.png)
+![hw6_patch](https://user-images.githubusercontent.com/113309864/204479534-e5b81925-47d3-43c7-804f-8b1d332d8390.png)
 
 ### Delete comment
-![](/home/haidamac/Pictures/hw6_delete.png)
+![hw6_delete](https://user-images.githubusercontent.com/113309864/204479661-5ae11191-7bb5-4da2-8812-4c51a83ed52c.png)
 
 
