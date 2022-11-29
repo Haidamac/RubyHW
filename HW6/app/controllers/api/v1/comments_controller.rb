@@ -64,10 +64,6 @@ class Api::V1::CommentsController < ApplicationController
       return render json: { message: 'resource id not found' }, status: :not_found
   end
 
-  def person_params
-    params.require(:comments).permit(:body, :status, :author_id)
-  end
-
   def comment_params
     params.require(:comment).permit(:body, :author_id)
   end
