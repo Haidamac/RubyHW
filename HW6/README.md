@@ -18,7 +18,7 @@ gem install bundler
 bundle install
 ```
 
-Attach ```config/database.yml``` with changes in database name
+Attach ```config/database.yml``` acording `database copy.yml` with your username and password
 
 Type in console:
 
