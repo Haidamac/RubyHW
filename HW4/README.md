@@ -8,6 +8,8 @@ A Ruby app that emulates an Ice Age stylization of Tamagotchi toy - saber-toothe
 - git clone https://github.com/Haidamac/RubyHW.git
 ```
 
+```cd RubyHW/HW4```
+
 ```ruby
 - gem install bundler 
 ```
