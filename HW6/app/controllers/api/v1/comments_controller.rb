@@ -4,7 +4,7 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: %i[show update destroy]
 
    def index
-     if status_params.include?(:status)
+     if status_params.presence
        @comment_status = @article.comments.where(status_params)
        render json: @comment_status
      else
@@ -69,7 +69,8 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def status_params
-    params.require(:comment).permit(:status)
+    params.permit(:status)
+    # params.require(:comment).permit(:status)
     # sp[:status] = params[:status].to_i
     # return sp
   end
