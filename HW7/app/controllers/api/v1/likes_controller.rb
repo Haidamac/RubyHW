@@ -1,23 +1,28 @@
 class Api::V1::LikesController < ApplicationController
 
   def create
-    @author = Author.find(params[:author_id])
-    @like = @author.likes.new(like_params)
-    @like.save
-    redirect_back(fallback_location: root_path)
+    if params[:article_id].present?
+      @article = Article.find(params[:article_id])
+      @like_article = @article.likes.create(like_params)
+      render json: @like_article, status: :ok
+    else
+      @comment = Comment.find(params[:comment_id])
+      @like_comment = @comment.likes.create(like_params)
+      render json: @like_comment, status: :ok
+    end
+
   end
 
   def destroy
-    @author = Author.find(params[:author_id])
-    @like = @author.likes.find(params[:id])
+    @like = Like.find(params[:id])
     @like.destroy
-    redirect_back(fallback_location: root_path)
+    render json: { message: 'Unliked' }
   end
 
   private
 
   def like_params
-    params.require(:like).permit(:likeable_id, :likeable_type)
+    params.require(:like).permit(:author_id)
   end
 
 end
