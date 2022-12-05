@@ -4,7 +4,7 @@
 Type in console:
 
 ```ruby
-git clone https://github.com/alinajuly/RubyHW.git
+git clone https://github.com/Haidamac/RubyHW.git
 ```
 
 ```ruby
