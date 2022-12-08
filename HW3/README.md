@@ -7,19 +7,23 @@ A Ruby app that emulates an Ice Age stylization of Tamagotchi toy - saber-toothe
 ## Setup Assuming you have ruby installed, in the terminal:
 
 ```ruby
-- git clone https://github.com/Haidamac/RubyHW.git
+git clone https://github.com/Haidamac/RubyHW.git
 ```
 
 ```ruby
-- gem install bundler 
+cd RubyHW/HW3
 ```
 
 ```ruby
-- bundle install
+gem install bundler 
 ```
 
 ```ruby
-- ruby iat.rb
+bundle install
+```
+
+```ruby
+ruby iat.rb
 ```
 
 Game uses 3 gems. See information about here:
