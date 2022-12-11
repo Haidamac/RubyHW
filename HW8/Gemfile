@@ -12,6 +12,9 @@ gem "pg", "~> 1.1"
 # Use pagination for articles
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 
+# Use serializer
+gem 'active_model_serializers', '~> 0.10.13'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 

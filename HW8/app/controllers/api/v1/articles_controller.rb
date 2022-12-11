@@ -31,9 +31,10 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   def show
-    @comments = @article.comments.all_comments.last(10)
-    @tags = @article.tags.all_tags
-    render json: { data: @article, tag: @tags, comment: @comments }, status: :ok
+    # @comments = @article.comments.all_comments.last(10)
+    # @tags = @article.tags.all_tags
+    # # render json: { data: @article, tag: @tags, comment: @comments }, status: :ok
+    render json: @article, each_serializer: Api::V1::ArticleSerializer, status: :ok
   end
 
   # POST /api/v1/articles
