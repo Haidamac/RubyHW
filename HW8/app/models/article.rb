@@ -4,7 +4,7 @@ class Article < ApplicationRecord
   has_many :articletags
   has_many :tags, through: :articletags
   has_many :likes, as: :likeable
-  enum status: { draft: 0, published: 1 }
+  enum status: { draft: 0, published: 1 } , default: 0
 
   validates :title, :body, presence: true
   scope :all_articles, -> { order('created_at DESC') }

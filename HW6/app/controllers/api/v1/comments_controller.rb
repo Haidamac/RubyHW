@@ -4,12 +4,9 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: %i[show update destroy]
 
   def index
-    if status_params.presence
-      @comment_status = @article.comments.where(status_params)
-      render json: @comment_status
-    else
-      render json: @article.comments
-    end
+    @comments = @article.comments
+    @comments = @article.comments.where(status: params[:status]) if params[:status].present?
+    render json: @comments
   end
 
   def show
@@ -26,7 +23,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update(status_params)
+    if @comment.update(comment_params)
       render json: @comment, status: :ok
     else
       render json: @comment.errors, status: :unprocessable_entity
@@ -65,10 +62,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :author_id)
-  end
-
-  def status_params
-    params.permit(:status)
+    params.require(:comment).permit(:body, :author_id, :status)
   end
 end
