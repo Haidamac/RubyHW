@@ -1,17 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :authors do
-      end
+      resources :authors
       resources :articles do
-        resources :comments do
-        end
+        resources :comments
       end
-
     end
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
