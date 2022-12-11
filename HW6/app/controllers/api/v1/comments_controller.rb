@@ -70,8 +70,5 @@ class Api::V1::CommentsController < ApplicationController
 
   def status_params
     params.permit(:status)
-    # params.require(:comment).permit(:status)
-    # sp[:status] = params[:status].to_i
-    # return sp
   end
 end
