@@ -8,6 +8,7 @@ class Api::V1::ArticlesController < ApplicationController
     else
       @articles = Article.where(filter_params)
     end
+    @pagy, @articles = pagy(@articles, page: params[:page], items: 15)
     if @articles
       render json: { data: @articles }, status: :ok
     else
