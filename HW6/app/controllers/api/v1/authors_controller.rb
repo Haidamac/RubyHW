@@ -1,4 +1,5 @@
 class Api::V1::AuthorsController < ApplicationController
+  before_action :set_author, only: %i[show destroy]
 
   def index
     @authors = Author.all
@@ -6,7 +7,6 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def show
-    @author = Author.find(params[:id])
     render json: { data: @author }, status: :ok
   end
 
@@ -16,11 +16,19 @@ class Api::V1::AuthorsController < ApplicationController
   end
 
   def destroy
-    @author = Author.find(params[:id])
     if @author.destroy!
       render json: { status: 'Delete' }, status: :ok
     else
       render json: @author.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def set_author
+    @author = Author.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    logger.info e
+    render json: { message: 'author id not found' }, status: :not_found
   end
 end
