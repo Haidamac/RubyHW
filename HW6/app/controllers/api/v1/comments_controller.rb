@@ -8,7 +8,7 @@ class Api::V1::CommentsController < ApplicationController
       @comment_status = @article.comments.where(status_params)
       render json: @comment_status
     else
-      render json: @article.comments.all
+      render json: @article.comments
     end
   end
 
