@@ -17,7 +17,7 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   def order
-    @result = Article.all.order(:title, params[:order])
+    @result = Article.all.order(title: params[:order])
     render json: { data: @result }, status: :ok
   end
 
