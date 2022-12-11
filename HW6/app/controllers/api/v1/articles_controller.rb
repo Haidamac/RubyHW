@@ -13,7 +13,7 @@ class Api::V1::ArticlesController < ApplicationController
 
   # GET /api/v1/articles/1
   def show
-    @comments = @article.comments.all_comments
+    @comments = @article.comments.recent
     render json: { data: @article, comment: @comments }, status: :ok
   end
 
@@ -49,7 +49,7 @@ class Api::V1::ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+  rescue ActiveRecord::RecordNotFound => e
     logger.info e
     render json: { message: 'article id not found' }, status: :not_found
   end
