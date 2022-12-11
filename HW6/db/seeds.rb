@@ -3,11 +3,11 @@ author2 = Author.create({ name: Faker::Book.author })
 author3 = Author.create({ name: Faker::Movies::StarWars.character })
 
 articles = 5.times do
-  Article.create({ title: Faker::ProgrammingLanguage.name, body:  Faker::Quote.matz})
+  Article.create({ title: Faker::ProgrammingLanguage.name, body: Faker::Quote.matz })
 end
 
-author_2_articles = 4.times do
-  Article.create({ title: Faker::Movies::StarWars.wookiee_sentence, body:  Faker::Movies::StarWars.quote})
+author_articles = 4.times do
+  Article.create({ title: Faker::Movies::StarWars.wookiee_sentence, body: Faker::Movies::StarWars.quote })
 end
 
 comment = 5.times do

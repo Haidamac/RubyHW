@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show update destroy ]
+  before_action :set_article, only: %i[show update destroy]
 
   # GET /api/v1/articles
   def index
@@ -30,7 +30,7 @@ class Api::V1::ArticlesController < ApplicationController
   # PATCH/PUT /api/v1/articles/1
   def update
     if @article.update(article_params)
-      render json: { status: "Update", data: @article }, status: :ok
+      render json: { status: 'Update', data: @article }, status: :ok
     else
       render json: @article.errors, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class Api::V1::ArticlesController < ApplicationController
   # DELETE /api/v1/articles/1
   def destroy
     if @article.destroy!
-      render json: { status: "Delete" }, status: :ok
+      render json: { status: 'Delete' }, status: :ok
     else
       render json: @article.errors, status: :unprocessable_entity
     end
@@ -50,8 +50,8 @@ class Api::V1::ArticlesController < ApplicationController
   def set_article
     @article = Article.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
-     logger.info e
-     return render json: { message: 'article id not found' }, status: :not_found
+    logger.info e
+    render json: { message: 'article id not found' }, status: :not_found
   end
 
   # Only allow a list of trusted parameters through.

@@ -1,5 +1,4 @@
 class Api::V1::AuthorsController < ApplicationController
-  #before_action :set_author, only: %i[show, destroy]
 
   def index
     @authors = Author.all
@@ -19,19 +18,9 @@ class Api::V1::AuthorsController < ApplicationController
   def destroy
     @author = Author.find(params[:id])
     if @author.destroy!
-      render json: { status: "Delete" }, status: :ok
+      render json: { status: 'Delete' }, status: :ok
     else
       render json: @author.errors, status: :unprocessable_entity
     end
   end
-
-#   private
-#
-#   def set_author
-#     @author = Author.find(params[:id])
-#   end
-#
-#   def author_params
-#     params.permit(:name)
-#   end
 end
