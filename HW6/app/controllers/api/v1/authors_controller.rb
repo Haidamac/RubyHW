@@ -12,7 +12,11 @@ class Api::V1::AuthorsController < ApplicationController
 
   def create
     @author = Author.create
-    render json: { data: @author }, status: :ok
+    if @author.save
+      render json: { data: @author }, status: :ok
+    else
+      render json: @author.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
