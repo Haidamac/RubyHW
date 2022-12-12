@@ -112,7 +112,7 @@ http://127.0.0.1:3000/api/v1/articles/:article_id/comments/:id
 
 Like the article with ```:article_id``` by user with ```:author_id``` (method POST):
 ```ruby
-http://127.0.0.1:3000/api/v1/articles/:article_id/likes?like[author_id]=:author_id
+http://127.0.0.1:3000/api/v1/articles/:article_id/likes?like[author_id]=:author_id&like[likeable_type]=Article&like[likeable_id]=:likeable_id]
 ```
 
 Unlike the article with ```:article_id``` and like's ```:id``` (method DELETE):
@@ -122,7 +122,7 @@ http://127.0.0.1:3000/api/v1/articles/:article_id/likes/:id
 
 Like the comment with ```:comment_id``` by user with ```:author_id``` (method POST):
 ```ruby
-http://127.0.0.1:3000/api/v1/articles/:article_id/comments/:comment_id/likes?like[author_id]=:author_id
+http://127.0.0.1:3000/api/v1/articles/:article_id/comments/:comment_id/likes?like[author_id]=:author_id&like[likeable_type]=Comment&like[likeable_id]=:likeable_id]
 ```
 
 Unlike the comment with ```:comment_id``` and like's ```:id``` (method DELETE):

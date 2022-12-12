@@ -50,9 +50,9 @@ class Api::V1::ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
+  rescue ActiveRecord::RecordNotFound => e
      logger.info e
-     return render json: { message: 'article id not found' }, status: :not_found
+  render json: { message: 'article id not found' }, status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
