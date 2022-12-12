@@ -23,7 +23,7 @@ articles3 = 3.times do
 end
 
 
-comment = 5.times do
+comment = 15.times do
   Comment.create({ body: Faker::Quote.jack_handey, author_id: 3, article_id: 1 })
 end
 

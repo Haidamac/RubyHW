@@ -13,7 +13,7 @@ class Api::V1::ArticlesController < ApplicationController
 
   # GET /api/v1/articles/1
   def show
-    @comments = @article.comments.all_comments.last(10)
+    @comments = @article.comments.last_ten
     @tags = @article.tags.all_tags
     render json: { data: @article, tag: @tags, comment: @comments }, status: :ok
   end
