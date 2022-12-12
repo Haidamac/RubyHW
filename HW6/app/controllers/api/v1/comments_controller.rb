@@ -5,7 +5,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     @comments = @article.comments
-    @comments = @article.comments.where(status: params[:status]) if params[:status].present?
+    @comments = @comments.where(status: params[:status]) if params[:status].present?
     render json: @comments
   end
 
