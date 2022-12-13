@@ -7,6 +7,7 @@ class Comment < ApplicationRecord
   validates :author, :article, presence: true
   validates :body, presence: true, length: { minimum: 5, message: "Comment must contain 5 characters at least" }
   scope :all_comments, -> { order('created_at ASC') }
+  scope :last_ten, -> { order(created_at: :asc).last(10) }
   scope :published_only, -> { where(status: 1) }
   scope :unpublished_only, -> { where(status: 0) }
 end
