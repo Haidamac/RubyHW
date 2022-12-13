@@ -3,11 +3,10 @@ class Api::V1::ArticlesController < ApplicationController
 
   # GET /api/v1/articles
   def index
-    if params[:tag_ids]
-      @articles = Article.includes(:tags).tags_query(params[:tag_ids])
-    else
-      @articles = Article.where(filter_params)
-    end
+    @articles = Article.all
+    @articles = @articles.status_filter(params[:status]) if params[:status].present?
+    @articles = @articles.author_filter(params[:author]) if params[:author].present?
+    @articles = @articles.tag_filter(params[:tags]) if params[:tags].present?
     @pagy, @articles = pagy(@articles, page: params[:page], items: 15)
     if @articles
       render json: { data: @articles }, status: :ok
@@ -24,16 +23,13 @@ class Api::V1::ArticlesController < ApplicationController
   def search
     @result = Article.all.where('title||body ILIKE ?', "%#{params[:q]}%")
     if @result.blank?
-      render json: { message: "Article not found" }
+      render json: { message: 'Article not found' }, status: :ok
     else
       render json: { data: @result }, status: :ok
     end
   end
 
   def show
-    # @comments = @article.comments.all_comments.last(10)
-    # @tags = @article.tags.all_tags
-    # # render json: { data: @article, tag: @tags, comment: @comments }, status: :ok
     render json: @article, each_serializer: Api::V1::ArticleSerializer, status: :ok
   end
 

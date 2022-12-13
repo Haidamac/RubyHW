@@ -40,14 +40,49 @@ rails s
 
 ## How it works
 
-List all articles (method GET):
+List first 15 articles (method GET):
 ```ruby
 http://127.0.0.1:3000/api/v1/articles
 ```
 
-List article with ```:id```, tags and last 10 comments (method GET):
+List next 15 articles (method GET):
+```ruby
+http://127.0.0.1:3000/api/v1/articles?page=2
+```
+etc
+
+List article with ```:id``` (serialization by id, title, body, created_at, author_name), tags and 
+comments (serialization by id, body, status, author_name, created_at) (method GET):
 ```ruby
 http://127.0.0.1:3000/api/v1/articles/:id
+```
+
+Search articles (method GET):
+```ruby
+http://127.0.0.1:3000/api/v1/search?q=searching_phrase
+```
+
+Filter articles (method GET):
+- by status:
+```ruby
+http://127.0.0.1:3000/api/v1/articles?status=0 (or 1)
+```
+-by name of author:
+```ruby
+http://127.0.0.1:3000/api/v1/articles?author=author_name
+```
+-by tags
+```ruby
+http://127.0.0.1:3000/api/v1/articles?tags=tag1&tags=tag2
+```
+
+Sort articles by title (method GET):
+```ruby
+http://127.0.0.1:3000/api/v1/order?order=asc
+```
+or
+```ruby
+http://127.0.0.1:3000/api/v1/order?order=desc
 ```
 
 List all tags (method GET):
