@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   has_many :likes, as: :likeable
   enum status: { unpublished: 0, published: 1 }
 
-  scope :status_filter, ->(status) { where(status: :status) }
+  scope :status_filter, ->(status) { where(status: status) }
   scope :author_filter, ->(name) { joins(:author).where('name ILIKE ?', "%#{name}%") }
   scope :tag_filter, ->(tags) { joins(:tags).where(tags: { tagname: tags }).distinct }
 
