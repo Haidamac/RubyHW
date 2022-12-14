@@ -8,7 +8,7 @@ git clone https://github.com/Haidamac/RubyHW.git
 ```
 
 ```ruby
-cd RubyHW/HW7
+cd RubyHW/HW8
 ````
 
 ```ruby

@@ -1,5 +1,5 @@
 class Api::V1::TagsController < ApplicationController
-  before_action :set_tag, only: %i[ show destroy ]
+  before_action :set_tag, only: %i[show destroy]
 
   def index
     @tags = Tag.all
@@ -26,7 +26,7 @@ class Api::V1::TagsController < ApplicationController
 
   def destroy
     if @tag.destroy!
-      render json: { status: "Delete" }, status: :ok
+      render json: { status: 'Delete' }, status: :ok
     else
       render json: @tag.errors, status: :unprocessable_entity
     end
@@ -38,11 +38,10 @@ class Api::V1::TagsController < ApplicationController
     @tag = Tag.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
-    return render json: { message: 'tag id not found' }, status: :not_found
+    render json: { message: 'tag id not found' }, status: :not_found
   end
 
   def tag_params
     params.require(:tag).permit(:tagname)
   end
-
 end

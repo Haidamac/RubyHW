@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :authors do
-      end
+      resources :authors
       resources :tags do
         resources :articles do
         end
@@ -25,7 +24,6 @@ Rails.application.routes.draw do
 
       get 'search', to: "articles#search"
       get 'order', to: "articles#order"
-
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
