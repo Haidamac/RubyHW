@@ -11,7 +11,7 @@ class Api::V1::TagsController < ApplicationController
   end
 
   def show
-    @articles_tag = @tag.articles.all_articles
+    @articles_tag = @tag.articles.all
     render json: { tag: @tag, article: @articles_tag }, status: :ok
   end
 
