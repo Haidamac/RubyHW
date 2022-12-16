@@ -43,6 +43,4 @@ Some of this Ice Age Tamagotchi's levels get to zero, your Tamagotchi will lose 
 
 To practice creating a complex time-sensitive ruby class with numerous interacting methods.
 
-## License
 
-MIT License, copyright 2022. Created by Serge Krynytsia
