@@ -8,7 +8,7 @@ class Article < ApplicationRecord
 
   scope :status_filter, ->(status) { where(status: status) }
   scope :author_filter, ->(name) { joins(:author).where('name ILIKE ?', "%#{name}%") }
-  scope :tag_filter, ->(tags) { joins(:tags).where(tags: { tagname: tags.split(',').collect { |tag| tag.strip } }).distinct }
+  scope :tag_filter, ->(tags) { joins(:tags).where(tags: { tagname: tags.split(',').collect { |tags| tags.strip.capitalize } }).distinct }
 
   validates :title, :body, presence: true
 end
