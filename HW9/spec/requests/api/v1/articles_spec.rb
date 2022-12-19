@@ -1,30 +1,18 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/articles', type: :request do
-
   path '/api/v1/articles' do
-
     get('list articles') do
       tags 'Article'
-
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :page, in: :query, schema: {
-          type: :string,
-        },
+        parameter name: :page, in: :query, schema: { type: :string },
           description: 'Get articles after the first 15 by page number'
-        parameter name: :status, in: :query, schema: {
-          type: :string,
-          enum: ['unpublished', 'published'],
-        },
+        parameter name: :status, in: :query, schema: { type: :string, enum: %w[unpublished published] },
           description: 'Get articles with status: published/unpublished'
-        parameter name: :author, in: :query, schema: {
-          type: :string,
-        },
+        parameter name: :author, in: :query, schema: { type: :string },
           description: 'Get articles by a specific author by his name'
-        parameter name: :tags, in: :query, schema: {
-          type: :string,
-        },
+        parameter name: :tags, in: :query, schema: { type: :string },
           description: 'Filter articles by tags'
         after do |example|
           example.metadata[:response][:content] = {
@@ -69,7 +57,6 @@ RSpec.describe 'api/v1/articles', type: :request do
 
     get('show article') do
       tags 'Article'
-
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -96,7 +83,6 @@ RSpec.describe 'api/v1/articles', type: :request do
         },
         required: false
       }
-
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -123,7 +109,6 @@ RSpec.describe 'api/v1/articles', type: :request do
         },
         required: false
       }
-
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -139,7 +124,6 @@ RSpec.describe 'api/v1/articles', type: :request do
 
     delete('delete article') do
       tags 'Article'
-
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -159,11 +143,8 @@ RSpec.describe 'api/v1/articles', type: :request do
     get('search article') do
       tags 'Article'
       consumes 'application/json'
-      parameter name: :q, in: :query, schema: {
-        type: :string,
-      },
+      parameter name: :q, in: :query, schema: { type: :string },
         description: 'Search articles by phrase in title or body'
-
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -182,11 +163,8 @@ RSpec.describe 'api/v1/articles', type: :request do
     get('order articles') do
       tags 'Article'
       consumes 'application/json'
-      parameter name: :order, in: :query, schema: {
-        type: :string,
-      },
+      parameter name: :order, in: :query, schema: { type: :string },
         description: 'Order articles by title asc/desc'
-
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
