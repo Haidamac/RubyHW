@@ -42,7 +42,7 @@ paths:
       - Article
       parameters: []
       responses:
-        '200':
+        '201':
           description: successful
       requestBody:
         content:
@@ -281,7 +281,7 @@ paths:
       tags:
       - Comment
       responses:
-        '200':
+        '204':
           description: successful
 servers:
 - url: http://{defaultHost}
