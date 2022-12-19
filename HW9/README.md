@@ -31,7 +31,12 @@ rails db:migrate
 ```
 
 ```ruby
-rails db:seed
+rails db:migrate RAILS_ENV=test 
+```
+
+
+```ruby
+rails db:seed RAILS_ENV=test
 ```
 
 ```ruby

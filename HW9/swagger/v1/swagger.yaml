@@ -23,12 +23,12 @@ paths:
           - unpublished
           - published
         description: 'Get articles with status: published/unpublished'
-      - name: author
+      - name: author_id
         in: query
         schema:
           type: string
         description: Get articles by a specific author by his name
-      - name: tags
+      - name: tags_ids
         in: query
         schema:
           type: string
@@ -133,7 +133,7 @@ paths:
       - Article
       responses:
         '200':
-          description: successful
+          description: Delete
   "/api/v1/search":
     get:
       summary: search article
@@ -192,7 +192,7 @@ paths:
       - Comment
       parameters: []
       responses:
-        '200':
+        '201':
           description: successful
       requestBody:
         content:
@@ -281,8 +281,8 @@ paths:
       tags:
       - Comment
       responses:
-        '204':
-          description: successful
+        '200':
+          description: Delete
 servers:
 - url: http://{defaultHost}
   variables:
