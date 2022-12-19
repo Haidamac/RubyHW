@@ -72,6 +72,6 @@ class Api::V1::ArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def article_params
-    params.permit(:title, :body, :status)
+    params.permit(:title, :body, :status, :author_id)
   end
 end
