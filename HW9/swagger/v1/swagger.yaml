@@ -23,7 +23,7 @@ paths:
           - unpublished
           - published
         description: 'Get articles with status: published/unpublished'
-      - name: author_id
+      - name: author
         in: query
         schema:
           type: string

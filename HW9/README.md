@@ -39,11 +39,27 @@ rails db:migrate RAILS_ENV=test
 rails db:seed RAILS_ENV=test
 ```
 
+For automatic test:
+
+```ruby
+rails rswag
+```
+
+```ruby
+rspec spec/requests/api/v1/articles_spec.rb
+```
+
+```ruby
+rspec spec/requests/api/v1/comments_spec.rb
+```
+
+For test manually:
+
 ```ruby
 rails s
 ```
 
-Open Swagger in browser:
+Open Swagger UI in browser:
 ```ruby
 http://127.0.0.1:3000/api-docs/index.html
 ```

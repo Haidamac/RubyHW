@@ -16,7 +16,7 @@ RSpec.describe 'api/v1/articles', type: :request do
       parameter name: :status, in: :query, schema: { type: :string, enum: %w[unpublished published] },
         description: 'Get articles with status: published/unpublished'
       parameter name: :author_id, in: :query, schema: { type: :string },
-        description: 'Get articles by a specific author by his name'
+        description: 'Get articles by a specific author'
       parameter name: :tags_ids, in: :query, schema: { type: :string },
         description: 'Filter articles by tags'
       response(200, 'successful') do
