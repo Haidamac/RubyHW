@@ -6,7 +6,7 @@ RSpec.describe 'api/v1/articles', type: :request do
   let(:article) { Article.first }
   let(:comment) { Comment.first }
   let(:tags) { Tag.first }
-
+  debugger
   path '/api/v1/articles' do
     get('list articles') do
       tags 'Article'
@@ -15,6 +15,7 @@ RSpec.describe 'api/v1/articles', type: :request do
       let(:tags_ids) { Tag.first.id }
       let(:author) { Author.first }
       let(:author_id) { Author.first.id }
+      let(:author.name) { Author.first.name }
       consumes 'application/json'
       parameter name: :page, in: :query, schema: { type: :string },
         description: 'Get articles after the first 15 by page number'
@@ -26,16 +27,14 @@ RSpec.describe 'api/v1/articles', type: :request do
         description: 'Filter articles by tags'
       response(200, 'successful') do
 
-        # закоментив, бо цей автоматичний тест не працює через неправильну передачу query author
-        # видає помилку bad URI, позаяк query передає як http://www.example.com:80/api/v1/articles?author=#
-        # after do |example|
-        #   example.metadata[:response][:content] = {
-        #     'application/json' => {
-        #       example: JSON.parse(response.body, symbolize_names: true)
-        #     }
-        #   }
-        # end
-        # run_test!
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
       end
     end
 

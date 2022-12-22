@@ -5,6 +5,37 @@ info:
   version: v1
 paths:
   "/api/v1/articles":
+    get:
+      summary: list articles
+      tags:
+      - Article
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: string
+        description: Get articles after the first 15 by page number
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - unpublished
+          - published
+        description: 'Get articles with status: published/unpublished'
+      - name: author
+        in: query
+        schema:
+          type: string
+        description: Get articles by a specific author
+      - name: tags_ids
+        in: query
+        schema:
+          type: string
+        description: Filter articles by tags
+      responses:
+        '200':
+          description: successful
     post:
       summary: create article
       tags:
