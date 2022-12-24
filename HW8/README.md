@@ -73,6 +73,10 @@ http://127.0.0.1:3000/api/v1/articles?author=author_name
 ```
 -by tags
 ```ruby
+http://127.0.0.1:3000/api/v1/articles?tags=tag1,tag2
+```
+or
+```ruby
 http://127.0.0.1:3000/api/v1/articles?tags=tag1&tags=tag2
 ```
 

@@ -1,5 +1,5 @@
 10.times do
-  Tag.create({ tagname: Faker::ProgrammingLanguage.name })
+  Tag.create({ tagname: Faker::ProgrammingLanguage.name.downcase })
 end
 
 3.times do
