@@ -7,4 +7,3 @@ use Rack::Auth::Basic do |username, password|
 end
 
 run Game.new
-

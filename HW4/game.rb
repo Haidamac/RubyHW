@@ -1,5 +1,4 @@
-require "erb"
-#require 'byebug'
+require 'erb'
 require_relative 'pet'
 
 class Game
@@ -25,11 +24,11 @@ class Game
 
     when '/game'
       return rack_response_redirect if pet.nil?
-      rack_response('game.html.erb')  
+      rack_response('game.html.erb')
 
     when '/give_food'
       return rack_response_redirect if pet.nil?
-      if pet.life > 0
+      if pet.life.positive?
         pet.give_food
         rack_response('game.html.erb')
       else
@@ -38,7 +37,7 @@ class Game
 
     when '/give_cure'
       return rack_response_redirect if pet.nil?
-      if pet.life > 0
+      if pet.life.positive?
         pet.give_cure
         rack_response('game.html.erb')
       else
@@ -47,7 +46,7 @@ class Game
 
     when '/give_water'
       return rack_response_redirect if pet.nil?
-      if pet.life > 0
+      if pet.life.positive?
         pet.give_water
         rack_response('game.html.erb')
       else
@@ -56,21 +55,21 @@ class Game
 
     when '/put_cave'
       return rack_response_redirect if pet.nil?
-      if pet.life > 0
+      if pet.life.positive?
         pet.put_cave
         rack_response('game.html.erb')
       else
         rack_response_redirect('/game_over')
-      end    
+      end
 
     when '/give_acorn'
       return rack_response_redirect if pet.nil?
-      if pet.life > 0
+      if pet.life.positive?
         pet.give_acorn
         rack_response('game.html.erb')
       else
         rack_response_redirect('/game_over')
-      end    
+      end
 
     when '/exit'
       @pet = nil
@@ -93,12 +92,4 @@ class Game
       response.redirect(new_path)
     end
   end
-
 end
-
-
-
-
-
-
-
