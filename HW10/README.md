@@ -25,5 +25,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
->>>>>>> d7d74b7 (HW10 first commit)
+
