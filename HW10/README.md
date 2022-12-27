@@ -1,28 +1,51 @@
-<<<<<<< HEAD
-# RubyHW
-Ruby Home Work on GeekHub
-=======
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to use
+Type in console:
 
-Things you may want to cover:
+```ruby
+git clone https://github.com/Haidamac/RubyHW.git
+```
 
-* Ruby version
+```ruby
+cd RubyHW/HW10
+````
 
-* System dependencies
+```ruby
+gem install bundler
+```
+```ruby
+bundle install
+```
 
-* Configuration
+Attach ```config/database.yml``` acording `database copy.yml` with your username and password
 
-* Database creation
+Type in console:
 
-* Database initialization
+```ruby
+rails db:create
+```
 
-* How to run the test suite
+```ruby
+rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```ruby
+rails db:seed
+```
+```ruby
+rails s
+```
 
-* Deployment instructions
+Run online store in browser:
+```ruby
+http://127.0.0.1:3000/
+```
+Login with ```user@example.com```, password: ```qwerty```
+or SignUp new user
 
-
+Run admin panel in browser:
+```ruby
+http://127.0.0.1:3000/admin
+```
+Login with ```admin@example.com```, password: ```password```
