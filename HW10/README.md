@@ -1,6 +1,12 @@
 # README
 
 ## How to use
+
+Install Node.js:
+```ruby
+sudo apt-get install nodejs
+````
+
 Type in console:
 
 ```ruby
