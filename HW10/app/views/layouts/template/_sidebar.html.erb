@@ -1,0 +1,15 @@
+<div class="col-2 flex-shrink-0 p-3 text-white bg-dark">
+  <div class="logo">
+    <img src="https://i.pinimg.com/originals/6c/b8/d2/6cb8d2031848c59812d1ae298939f4ed.jpg" alt="" width="80">
+  </div>
+  <div class="category">
+    <h4>Categories:</h4>
+  </div>
+  <ul class="nav nav-pills flex-column mb-auto">
+      <% Category.all.each do |category| %>
+        <li class="nav-item">
+          <%= link_to category.title, category, class: "nav-link text-white" %>
+        </li>
+      <% end %>
+    </ul>
+</div>

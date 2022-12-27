@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Store</title>
+    <title>HW10 Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,9 +9,16 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <main class="container">
-      <%= render partial: "layouts/template/flash_message" %>
-      <%= yield %>
-    </main>
+
+  <div class="container-fluid vh-100">
+    <div class="row vh-100">
+      <%= render partial: "layouts/template/sidebar" %>
+      <div class="col-10 hv-100" style="padding: 0">
+        <%= render partial: "layouts/template/navbar" %>
+        <%= render partial: "layouts/template/flash_message" %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

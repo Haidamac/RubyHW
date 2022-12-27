@@ -1,27 +1,9 @@
 <div id="viewport">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <header>
-      <h2><%= link_to "HW10 Store", root_path %></h2>
-    </header>
-    <div class="categories"><h5><i>Categories:</i></h5></div>
-    <ul class="nav">
-      <% Category.all.each do |category| %>
-      <%= link_to category.title, category, class: "dropdown-item" %>
-      <% end %>
-    </ul>
-    <div class="logout">
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
   <!-- Content -->
   <div id="content">
     <div class="container-fluid">
       <div class="row">
-        <h3 class="text-center">Products</h3>
+        <h3 class="text-center">Our Products</h3>
       </div>
       <div class="row">
         <%= render partial: "products/products" %>
