@@ -25,3 +25,16 @@
 .actions, .field, .login {
   padding-left: 15px;
 }
+
+a:link, a:visited  {
+  color: slategrey;
+  text-decoration: none;
+}
+
+a:hover  {
+  color: #FF0000;
+}
+
+a:active  {
+  color: #F00FFF;
+}
