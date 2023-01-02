@@ -18,7 +18,12 @@
         <p class="card-text"><%= @product.description %></p>
         <p class="text-end"><i>Category: <%= @product.category.title %></i></p>
         <p class="card-text"><h4 style="color:#d63384; text-align:right">Price: <%= number_to_currency(@product.price) %></h4></p>
-        <%= button_to 'Add to cart', line_items_path(product_id: @product.id), class: 'btn btn-primary' %>
+        <%if !current_cart.line_item.where(product_id: @product.id).present?%>
+          <!-- Add to Cart -->
+          <%= button_to 'Add to cart', line_items_path(product_id: @product.id), class: 'btn btn-outline-primary' %>
+        <%else %>
+          <%= button_to 'Checkout', orders_path, class: 'btn btn-outline-primary' %>
+        <%end%>
       </div>
     </div>
   </div>
