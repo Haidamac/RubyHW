@@ -1,18 +1,18 @@
-<% if current_user %>
-  <nav class="navbar nav-layout navbar-expand-lg bg-dark">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <h2 class="navbar-brand"><%= link_to "HW10 Store", root_path %></h2>
-      </div>
+<nav class="navbar nav-layout navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h2 class="navbar-brand"><%= link_to "HW10 Store", root_path %></h2>
+    </div>
 <!--    <ul class="nav navbar-nav">-->
 <!--      <li class="active"><a href="#">Home</a></li>-->
 <!--      <li><a href="#">Page 1</a></li>-->
 <!--      <li><a href="#">Page 2</a></li>-->
 <!--    </ul>-->
-      <ul class="nav navbar-nav navbar-right">
-<!--      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-<!--      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
-        <li>
+    <ul class="nav navbar-nav navbar-right">
+<!--    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+<!--    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+      <li>
+        <% if current_user %>
           <div>
             <%= link_to 'Cart', cart_path, class: "btn btn-outline-light me-2" %>
             <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
@@ -20,8 +20,14 @@
               <span class="navbar-toggler-icon"></span>
             </button>
           </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-<% end %>
+        <% else %>
+          <div>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-outline-light me-2" %>
+            <%= link_to 'Sign In', new_user_session_path, class: "btn btn-outline-light me-2" %>
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
+
