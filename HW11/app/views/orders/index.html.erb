@@ -1,49 +1,51 @@
-<h1>History of your orders:</h1>
+<% if current_user %>
+  <h1>History of your orders:</h1>
 
-<% @orders.each do |order| %>
-  <% if order.status == 'paid' %>
-    <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
-  <% else %>
-    <%= link_to 'Order #', order_path(order) %> <%= order.id %>
-  <% end %>
-  <br>
-  Date of purchase <%= order.updated_at %>
-  <table class='table'>
-    <tr>
-      <th>#</th>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Status</th>
-    </tr>
-    <% @sum_order = 0 %>
-    <% order.cart.line_item.each_with_index do |line_item, index| %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
-        <td><%= line_item.product.name %></td>
-        <td><%= line_item.quantity %></td>
-        <td><%= number_to_currency line_item.price * line_item.quantity %></td>
-        <td></td>
-      </tr>
-      <% @sum_order += line_item.price * line_item.quantity %>
+  <% @orders.each do |order| %>
+    <% if order.status == 'paid' %>
+      <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
+    <% else %>
+      <%= link_to 'Order #', order_path(order) %> <%= order.id %>
     <% end %>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><b>Total price:</b></td>
-      <td><b><%= number_to_currency @sum_order %></b></td>
-      <td>
-        <% if order.status == 'paid' %>
-          <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
-        <% else %>
-          <%= link_to 'unpaid!', order_path(order), class: 'btn btn-outline-danger btn-sm' %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
-
-
+    <br>
+    Date of purchase <%= order.updated_at %>
+    <table class='table'>
+      <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+      <% @sum_order = 0 %>
+      <% order.cart.line_item.each_with_index do |line_item, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
+          <td><%= line_item.product.name %></td>
+          <td><%= line_item.quantity %></td>
+          <td><%= number_to_currency line_item.price * line_item.quantity %></td>
+          <td></td>
+        </tr>
+        <% @sum_order += line_item.price * line_item.quantity %>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Total price:</b></td>
+        <td><b><%= number_to_currency @sum_order %></b></td>
+        <td>
+          <% if order.status == 'paid' %>
+            <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
+          <% else %>
+            <%= link_to 'unpaid!', order_path(order), class: 'btn btn-outline-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  <h3>Please SignIn or SignUp!</h3>
 <% end %>

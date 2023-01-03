@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
-    @orders = current_user.orders.all
+    @orders = current_user.orders.all if current_user
   end
 
   def create
@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   def show; end
 
   def pay_details
-    @order_id = @order.id
+    @order_id = @order.id if current_user
     @sum = current_cart.total_price
   end
 
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.find(params[:id]) if current_user
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
     render json: { message: 'order id not found' }, status: :not_found
