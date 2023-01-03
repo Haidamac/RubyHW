@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show pay paid]
+  before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
     @orders = current_user.orders.all
@@ -13,8 +13,16 @@ class OrdersController < ApplicationController
 
   def show; end
 
+  def pay_details
+    @order_id = @order.id
+    @sum = current_cart.total_price
+  end
+
   def pay
     @order.update(status: :paid)
+    @user_email = current_user.email
+    @order_id = @order.id
+    UserMailer.welcome.deliver_now
     redirect_to order_paid_path, method: :get, notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
   end
 

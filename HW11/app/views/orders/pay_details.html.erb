@@ -1,6 +1,7 @@
 <div class="payment-title">
   <h1>Payment Information</h1>
-<!--  Order #<%#= @order.id %>-->
+  <p>Order # <%= @order_id %></p>
+  <p>Payment amount <%= number_to_currency @sum %></p>
 </div>
 <div class="card mb-3" style="max-width: 400px;">
 <div class="form-container">
