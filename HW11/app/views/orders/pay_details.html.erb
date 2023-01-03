@@ -4,27 +4,41 @@
     <p>Order # <%= @order_id %></p>
     <p>Payment amount <%= number_to_currency @sum %></p>
   </div>
-  <div class="card mb-3" style="max-width: 400px;">
-    <div class="form-container">
-      <div class="field-container">
-        <label for="name">Cardholder</label>
-        <input id="name" maxlength="20" type="text" required>
-      </div>
-      <div class="field-container">
-        <label for="cardnumber">Card Number</label>
-        <input id="cardnumber" type="text" placeholder="0000-0000-0000-0000" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" inputmode="numeric" size='16' required>
-      </div>
-      <div class="field-container">
-        <label for="expirationdate">Expiration (mm/yy)</label>
-        <input id="expirationdate" type="text" placeholder="01/23" pattern="[0-9]{2}/[0-9]{2}" inputmode="numeric" size='5' required>
-      </div>
-      <div class="field-container">
-        <label for="securitycode">Security Code</label>
-        <input id="securitycode" type="text" placeholder="000" pattern="[0-9]{3}" inputmode="numeric" size='3' required>
-      </div>
+<!--  <div class="card mb-3" style="max-width: 400px;">-->
+<!--    <div class="form-container">-->
+<!--      <div class="field-container">-->
+<!--        <label for="name">Cardholder</label>-->
+<!--        <input id="name" maxlength="20" type="text" required>-->
+<!--      </div>-->
+<!--      <div class="field-container">-->
+<!--        <label for="cardnumber">Card Number</label>-->
+<!--        <input id="cardnumber" type="text" placeholder="0000-0000-0000-0000" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" inputmode="numeric" size='16' required>-->
+<!--      </div>-->
+<!--      <div class="field-container">-->
+<!--        <label for="expirationdate">Expiration (mm/yy)</label>-->
+<!--        <input id="expirationdate" type="text" placeholder="01/23" pattern="[0-9]{2}/[0-9]{2}" inputmode="numeric" size='5' required>-->
+<!--      </div>-->
+<!--      <div class="field-container">-->
+<!--        <label for="securitycode">Security Code</label>-->
+<!--        <input id="securitycode" type="text" placeholder="000" pattern="[0-9]{3}" inputmode="numeric" size='3' required>-->
+<!--      </div>-->
+<!--    </div>-->
+    <%#= button_to 'Confirm', order_pay_path, method: :put, class: 'btn btn-outline-dark' %>
+<!--  </div>-->
+  <%= form_tag({controller: 'orders', action: 'pay'}, method: :post, id: 'simplify-payment-form') do %>
+    <div>
+      <%= label_tag('cardnumber', 'Credit Card Number:') %>
+      <%= text_field_tag('cardnumber', nil, maxlength: 16, autocomplete: 'off', autofocus: true) %>
     </div>
-    <%= button_to 'Confirm', order_pay_path, method: :put, class: 'btn btn-outline-dark' %>
-  </div>
+    <div>
+      <%= label_tag('expirationdate', 'Expiry Date:') %>
+      <%= select_month(Date.new(Date.today.year, 1).beginning_of_month, {use_two_digit_numbers: true}, {id: 'expirationmonth'}) %>
+      <%= select_year(Date.today, {start_year: Date.today.year, end_year: Date.today.year+10}, {id: 'expirationyear'}) %>
+      <%= label_tag('securitycode', 'CVC:') %>
+      <%= text_field_tag('securitycode', nil, size: 3, autocomplete: 'off') %>
+    </div>
+    <%= button_to 'Process Payment', order_pay_path, method: :post, class: 'btn btn-outline-dark' %>
+  <% end %>
 <% else %>
   <h3>Please SignIn or SignUp!</h3>
 <% end %>
