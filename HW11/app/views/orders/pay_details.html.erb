@@ -11,14 +11,14 @@
   <%= form_tag({controller: 'orders', action: 'pay'}, method: :post, id: 'simplify-payment-form') do %>
     <div>
       <%= label_tag('cardnumber', 'Credit Card Number:') %>
-      <%= text_field_tag('cardnumber', nil, maxlength: 16, autocomplete: 'off', autofocus: true, :pattern => '[0-9]{16}', :required => true) %>
+      <%= text_field_tag('cardnumber', nil, maxlength: 16, autocomplete: 'off', autofocus: true, :pattern => '[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}', :placeholder => '0000 0000 0000 0000', :required => true) %>
     </div>
     <div>
       <%= label_tag('expirationdate', 'Expiry Date:') %>
       <%= select_month(Date.new(Date.today.year, 1).beginning_of_month, {use_two_digit_numbers: true}, {id: 'expirationmonth'}) %>
       <%= select_year(Date.today, {start_year: Date.today.year, end_year: Date.today.year+10}, {id: 'expirationyear'}) %>
       <%= label_tag('securitycode', 'CVC:') %>
-      <%= text_field_tag('securitycode', nil, size: 3, autocomplete: 'off', :pattern => '[0-9]{3}', :required => true) %>
+      <%= text_field_tag('securitycode', nil, size: 3, autocomplete: 'off', :pattern => '[0-9]{3}', :placeholder => '000', :required => true) %>
     </div>
     <%= button_to order_pay_path, method: :post, class: 'btn btn-outline-dark' do %>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
