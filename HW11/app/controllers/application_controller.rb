@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_cart, :cart_products_quantity
 
   def current_cart
     Cart.find(cookies[:cart_id])
@@ -9,8 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def cart_products_quantity
-    current_cart.line_items.map(&:quantity).sum
+    current_cart.line_item.map(&:quantity).sum
   end
-
-  helper_method :current_cart
 end
