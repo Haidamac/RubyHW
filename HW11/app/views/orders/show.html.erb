@@ -1,5 +1,8 @@
 <% if current_user %>
-  <h1>Order #<%= @order.id %></h1>
+  <h1> <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+  </svg>
+    Order #<%= @order.id %></h1>
 
   <table class='table'>
     <tr>
@@ -47,7 +50,12 @@
       <td><b><%= number_to_currency @sum_order %></b></td>
     </tr>
   </table>
-  <%= button_to 'Proceed to payment', order_pay_details_path, method: :get, class: 'btn btn-outline-primary' %>
+  <%= button_to order_pay_details_path, method: :get, class: 'btn btn-outline-primary' do %>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-front-fill" viewBox="0 0 16 16">
+      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+    </svg>
+    Proceed to payment
+  <% end %>
 <% else %>
   <h3>Please SignIn or SignUp!</h3>
 <% end %>

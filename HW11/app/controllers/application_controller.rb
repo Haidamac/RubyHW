@@ -8,5 +8,9 @@ class ApplicationController < ActionController::Base
     cart
   end
 
+  def cart_products_quantity
+    current_cart.line_items.map(&:quantity).sum
+  end
+
   helper_method :current_cart
 end
