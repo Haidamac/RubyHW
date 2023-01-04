@@ -9,20 +9,20 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    @line_item = LineItem.find(params[:id])
+    set_line_item
     @line_item.destroy
     redirect_back(fallback_location: current_cart)
   end
 
   def add_quantity
-    @line_item = LineItem.find(params[:id])
+    set_line_item
     @line_item.quantity += 1
     @line_item.save
     redirect_back(fallback_location: current_cart)
   end
 
   def reduce_quantity
-    @line_item = LineItem.find(params[:id])
+    set_line_item
     if @line_item.quantity > 1
       @line_item.quantity -= 1
       @line_item.save
@@ -30,6 +30,15 @@ class LineItemsController < ApplicationController
     elsif @line_item.quantity == 1
       destroy
     end
+  end
+
+  private
+
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    logger.info e
+    render json: { message: 'line_item id not found' }, status: :not_found
   end
 
 end
