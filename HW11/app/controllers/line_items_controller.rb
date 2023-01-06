@@ -40,5 +40,4 @@ class LineItemsController < ApplicationController
     logger.info e
     render json: { message: 'line_item id not found' }, status: :not_found
   end
-
 end
