@@ -3,10 +3,10 @@
     <h6>Categories:</h6>
   </div>
   <ul class="nav nav-pills flex-column mb-auto">
-      <% Category.all.each do |category| %>
-        <li class="nav-item">
-          <%= link_to category.title, category %>
-        </li>
-      <% end %>
-    </ul>
+    <% Category.all.each do |category| %>
+      <li class="nav-item">
+        <%= link_to category.title, category %>
+      </li>
+    <% end %>
+  </ul>
 </div>

@@ -5,7 +5,11 @@
   </svg>
     <i>Details of your order:</i></h5>
   <h3>Order #<%= @order.id %></h3>
-  <h6>Date of purchase <%= @order.updated_at %></h6>
+  <% if @order.status == 'paid' %>
+    <p>Date of purchase <%= @order.updated_at %></p>
+  <% else %>
+    <p class='text-danger'>Your order is unpaid! Order date <%= @order.updated_at %></p>
+  <% end %>
   <table class='table'>
     <tr>
       <th>#</th>

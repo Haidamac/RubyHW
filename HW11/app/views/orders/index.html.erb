@@ -10,8 +10,8 @@
       <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
       <p>Date of purchase <%= order.updated_at %></p>
     <% else %>
-      <%= link_to 'Order #', order_path(order) %> <%= order.id %>
-      <p class='text-danger'>Your order is unpaid! Order date <%= order.updated_at %></p>
+      <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
+      <p>Order date <%= order.updated_at %></p>
     <% end %>
     <br>
     <table class='table'>
@@ -45,7 +45,7 @@
           <% if order.status == 'paid' %>
             <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
           <% else %>
-            <%= link_to 'unpaid!', order_path(order), class: 'btn btn-outline-danger btn-sm' %>
+            <%= link_to 'unpaid', order_paid_path(order), class: 'btn btn-outline-danger btn-sm' %>
           <% end %>
         </td>
       </tr>
