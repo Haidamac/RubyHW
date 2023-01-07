@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 
   def create
     order = current_user.orders.create(cart: current_cart)
-    # cookies.delete(:cart_id)
+    cookies.delete(:cart_id)
     redirect_to order_path(order), notice: 'Order was successfully created'
   end
 
@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
 
   def pay_details
     @order_id = @order.id if current_user
-    @sum = current_cart.total_price
   end
 
   def pay
@@ -27,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def paid
-    cookies.delete(:cart_id)
+    # cookies.delete(:cart_id)
   end
 
   private

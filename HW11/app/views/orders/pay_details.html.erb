@@ -6,7 +6,7 @@
     </svg>
       Payment Information</h1>
     <h5>Order # <%= @order_id %></h5>
-    <h5>Payment amount <%= number_to_currency @sum %></h5>
+    <h5>Payment amount <%= number_to_currency @order.order_price %></h5>
   </div>
   <%= form_tag({controller: 'orders', action: 'pay'}, method: :post, id: 'simplify-payment-form') do %>
     <div>
