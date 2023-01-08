@@ -10,13 +10,13 @@ RSpec.describe 'api/v1/comments', type: :request do
     # You'll want to customize the parameter types...
     # debugger
     parameter name: 'article_id', in: :path, type: :string, description: 'article_id'
-    let(:article_id) { Article.first.id }
     get('list comments') do
       tags 'Comment'
       consumes 'application/json'
       parameter name: :status, in: :query, schema: { type: :string, enum: %w[unpublished published] },
-        description: 'Get comments with status: published/unpublished'
+        description 'Get comments with status: published/unpublished'
       response(200, 'successful') do
+        let(:article_id) { Article.first.id }
         it 'Get published/unpublished comments for article' do
           expect(Comment.where(article_id: article_id, status: 'unpublished').ids).to eq(article.comments.unpublished.ids)
         end
@@ -54,12 +54,11 @@ RSpec.describe 'api/v1/comments', type: :request do
     # You'll want to customize the parameter types...
     parameter name: 'article_id', in: :path, type: :string, description: 'article_id'
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    let(:article_id) { Article.first.id }
-    let(:id) { Comment.first.id }
-
     get('show comment') do
       tags 'Comment'
       response(200, 'successful') do
+        let(:article_id) { Article.first.id }
+        let(:id) { Comment.first.id }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
