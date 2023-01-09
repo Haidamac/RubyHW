@@ -24,8 +24,8 @@ Rails.application.routes.draw do
         end
       end
 
-      get 'search', to: "articles#search"
-      get 'order', to: "articles#order"
+      get 'search', to: 'articles#search'
+      get 'order', to: 'articles#order'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

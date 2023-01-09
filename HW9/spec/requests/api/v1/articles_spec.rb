@@ -2,22 +2,22 @@ require 'swagger_helper'
 require 'rails_helper'
 
 RSpec.describe 'api/v1/articles', type: :request do
-  let(:author) { Author.first }
-  let(:article) { Article.first }
-  let(:comment) { Comment.first }
-  let(:tags) { Tag.first }
+  let!(:author) { Author.first }
+  let!(:article) { Article.first }
+  let!(:comment) { Comment.first }
+  let!(:tags) { Tag.first }
   path '/api/v1/articles' do
     get('list articles') do
       tags 'Article'
       consumes 'application/json'
       parameter name: :page, in: :query, schema: { type: :string },
-        description: 'Get articles after the first 15 by page number'
+                description: 'Get articles after the first 15 by page number'
       parameter name: :status, in: :query, schema: { type: :string, enum: %w[unpublished published] },
-        description: 'Get articles with status: published/unpublished'
+                description: 'Get articles with status: published/unpublished'
       parameter name: :author, in: :query, schema: { type: :string },
-        description: 'Get articles by a specific author'
+                description: 'Get articles by a specific author'
       parameter name: :tags_ids, in: :query, schema: { type: :string },
-        description: 'Filter articles by tags'
+                description: 'Filter articles by tags'
       response(200, 'successful') do
         let(:page) { '1' }
         let(:status) { 'unpublished' }
@@ -49,11 +49,10 @@ RSpec.describe 'api/v1/articles', type: :request do
         required: %w[title body author_id]
       }
       response(201, 'successful') do
-        let(:author) { create(:author, name: 'Aaaaaaaaaaaa') }
+        let(:author) { create(:author) }
         let(:author_id) { author.id }
-        let(:article) { create(:article, title: 'Lorem', body: 'Lorem ipsum', author_id: author_id) }
+        let(:article) { create(:article, author_id: author_id) }
         let(:id) { article.id }
-        let(:title) { article.title }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -63,7 +62,7 @@ RSpec.describe 'api/v1/articles', type: :request do
         end
         run_test! do
           data = JSON.parse(response.body)
-          expect(data['title']).to eq('Lorem')
+          expect(data['data']['title']).to eq('Lorem')
         end
       end
     end
@@ -76,6 +75,7 @@ RSpec.describe 'api/v1/articles', type: :request do
     get('show article') do
       tags 'Article'
       response(200, 'successful') do
+        let(:title) { article.title }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -83,7 +83,10 @@ RSpec.describe 'api/v1/articles', type: :request do
             }
           }
         end
-        run_test!
+        run_test! do
+          data = JSON.parse(response.body)
+          expect(data['title']).to eq(article.title)
+        end
       end
     end
 
@@ -96,7 +99,7 @@ RSpec.describe 'api/v1/articles', type: :request do
           title: { type: :string },
           body: { type: :string },
           author_id: { type: :integer },
-          status: { type: :string, enum: %w[unpublished published] },
+          status: { type: :string, enum: %w[unpublished published] }
         },
         required: false
       }
@@ -125,7 +128,7 @@ RSpec.describe 'api/v1/articles', type: :request do
           title: { type: :string },
           body: { type: :string },
           author_id: { type: :integer },
-          status: { type: :string, enum: %w[unpublished published] },
+          status: { type: :string, enum: %w[unpublished published] }
         },
         required: false
       }
@@ -165,12 +168,11 @@ RSpec.describe 'api/v1/articles', type: :request do
   end
 
   path '/api/v1/search' do
-
     get('search article') do
       tags 'Article'
       consumes 'application/json'
       parameter name: :q, in: :query, schema: { type: :string },
-        description: 'Search articles by phrase in title or body'
+                description: 'Search articles by phrase in title or body'
       response(200, 'successful') do
         let(:q) { 'programming' }
         after do |example|
@@ -186,12 +188,10 @@ RSpec.describe 'api/v1/articles', type: :request do
   end
 
   path '/api/v1/order' do
-
     get('order articles') do
       tags 'Article'
       consumes 'application/json'
-      parameter name: :order, in: :query, schema: { type: :string },
-        description: 'Order articles by title asc/desc'
+      parameter name: :order, in: :query, schema: { type: :string }, description: 'Order articles by title asc/desc'
       response(200, 'successful') do
         let(:order) { 'asc' }
         after do |example|

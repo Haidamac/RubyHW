@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/comments', type: :request do
-  let(:author) { Author.first }
-  let(:article) { Article.first }
-  let(:comment) { Comment.first }
+  let!(:author) { Author.first }
+  let!(:article) { Article.first }
+  let!(:comment) { Comment.first }
 
   path '/api/v1/articles/{article_id}/comments' do
     # You'll want to customize the parameter types...
@@ -14,13 +14,20 @@ RSpec.describe 'api/v1/comments', type: :request do
       tags 'Comment'
       consumes 'application/json'
       parameter name: :status, in: :query, schema: { type: :string, enum: %w[unpublished published] },
-        description 'Get comments with status: published/unpublished'
+                description: 'Get comments with status published/unpublished'
       response(200, 'successful') do
         let(:article_id) { Article.first.id }
-        it 'Get published/unpublished comments for article' do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test! do
+          data = JSON.parse(response.body)
           expect(Comment.where(article_id: article_id, status: 'unpublished').ids).to eq(article.comments.unpublished.ids)
         end
-        run_test!
       end
     end
 
@@ -36,8 +43,9 @@ RSpec.describe 'api/v1/comments', type: :request do
         required: %w[body author_id]
       }
       response(201, 'successful') do
-        let(:comment) { { body: 'Body comment', article_id: article.id, author_id: author.id } }
-
+        let(:author_id) { Author.first.id }
+        let(:article_id) { Article.first.id }
+        let(:comment) { create(:comment, author_id: author_id, article_id: article_id) }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -45,7 +53,10 @@ RSpec.describe 'api/v1/comments', type: :request do
             }
           }
         end
-        run_test!
+        run_test! do
+          data = JSON.parse(response.body)
+          expect(data['body']).to eq('Lorem ipsum dolor')
+        end
       end
     end
   end
@@ -59,6 +70,7 @@ RSpec.describe 'api/v1/comments', type: :request do
       response(200, 'successful') do
         let(:article_id) { Article.first.id }
         let(:id) { Comment.first.id }
+        let(:body) { comment.body }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -66,7 +78,10 @@ RSpec.describe 'api/v1/comments', type: :request do
             }
           }
         end
-        run_test!
+        run_test! do
+          data = JSON.parse(response.body)
+          expect(data['body']).to eq(comment.body)
+        end
       end
     end
 
@@ -83,12 +98,8 @@ RSpec.describe 'api/v1/comments', type: :request do
           required: false
         }
       response(200, 'successful') do
-        describe 'PATCH api/v1/articles{id}/comments{id}' do
-          it 'check patch comment' do
-            comment.update(status: 'published')
-            expect(Comment.find_by(status: 'published')).to eq(comment)
-          end
-        end
+        let(:article_id) { Article.first.id }
+        let(:id) { Comment.first.id }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -96,7 +107,11 @@ RSpec.describe 'api/v1/comments', type: :request do
             }
           }
         end
-        run_test!
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          comment.update(status: 'published')
+          expect(Comment.find_by(status: 'published')).to eq(comment)
+        end
       end
     end
 
@@ -113,12 +128,15 @@ RSpec.describe 'api/v1/comments', type: :request do
         required: false
       }
       response(200, 'successful') do
-        describe 'PUT api/v1/articles{id}/comments{id}' do
-          it 'check put comment' do
-            comment.update(body: 'Great job!')
-            expect(Comment.find_by(body: 'Great job!')).to eq(comment)
-          end
-        end
+        let(:article_id) { Article.first.id }
+        let(:id) { Comment.first.id }
+        let(:body) { comment.body }
+        # describe 'PUT api/v1/articles{id}/comments{id}' do
+        #   it 'check put comment' do
+        #     comment.update(body: 'Great job!')
+        #     expect(Comment.find_by(body: 'Great job!')).to eq(comment)
+        #   end
+        # end
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -126,20 +144,24 @@ RSpec.describe 'api/v1/comments', type: :request do
             }
           }
         end
-        run_test!
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          comment.update(body: 'Great job!')
+          expect(Comment.find_by(body: 'Great job!')).to eq(comment)
+        end
       end
     end
 
     delete('delete comment') do
       tags 'Comment'
       response(200, 'Delete') do
-        describe 'DELETE api/v1/articles{id}/comments{id}' do
-          it 'delete comment' do
-            comment.destroy
-            expect(Comment.find_by_id('id')).to eq(nil)
-          end
+        let(:article_id) { Article.first.id }
+        let(:id) { Comment.first.id }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          comment.destroy
+          expect(Comment.find_by_id('id')).to eq(nil)
         end
-        run_test!
       end
     end
   end
