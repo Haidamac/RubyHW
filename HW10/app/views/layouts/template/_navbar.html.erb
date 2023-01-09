@@ -1,22 +1,15 @@
 <% if current_user %>
-  <nav class="navbar nav-layout navbar-expand-lg bg-dark">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <h2 class="navbar-brand"><%= link_to "HW10 Store", root_path %></h2>
+  <nav class='navbar nav-layout navbar-expand-lg bg-dark'>
+    <div class='container-fluid'>
+      <div class='navbar-header'>
+        <h2 class='navbar-brand'><%= link_to 'HW10 Store', root_path %></h2>
       </div>
-<!--    <ul class="nav navbar-nav">-->
-<!--      <li class="active"><a href="#">Home</a></li>-->
-<!--      <li><a href="#">Page 1</a></li>-->
-<!--      <li><a href="#">Page 2</a></li>-->
-<!--    </ul>-->
-      <ul class="nav navbar-nav navbar-right">
-<!--      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-<!--      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+      <ul class='nav navbar-nav navbar-right'>
         <li>
           <div>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-light me-2" %>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-              <span class="navbar-toggler-icon"></span>
+            <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light me-2' %>
+            <button class='navbar-toggler' type='button' data-bs-toggle='offcanvas' data-bs-target='#offcanvasDarkNavbar' aria-controls='offcanvasDarkNavbar'>
+              <span class='navbar-toggler-icon'></span>
             </button>
           </div>
         </li>
