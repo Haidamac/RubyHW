@@ -34,6 +34,9 @@ rails db:migrate
 rails db:migrate RAILS_ENV=test 
 ```
 
+```ruby
+rails db:seed
+```
 
 ```ruby
 rails db:seed RAILS_ENV=test
