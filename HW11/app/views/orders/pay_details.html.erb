@@ -27,9 +27,9 @@
       </div>
       <div style="margin: 15px 0px 35px">
         <%= label_tag('region', 'Region:') %>
-        <%= text_field_tag('region', nil, size: 10, autocomplete: 'on') %>
+        <%= text_field_tag('region', nil, size: 17, autocomplete: 'on') %>
         <%= label_tag('phone', 'Phone:') %>
-        <%= text_field_tag('phone', nil, size: 17, autocomplete: 'on', :pattern => '+[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}', :placeholder => '+380-00-000-00-00', :required => true) %>
+        <%= text_field_tag('phone', nil, size: 10, autocomplete: 'on', :pattern => '+[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}', :placeholder => '+380-00-000-00-00', :required => true) %>
       </div>
     <% end %>
   </div>
