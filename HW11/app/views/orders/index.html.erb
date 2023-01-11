@@ -8,10 +8,10 @@
   <% @orders.each do |order| %>
     <% if order.status == 'paid' %>
       <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
-      <p>Date of purchase <%= order.updated_at %></p>
+      <p>Date of purchase <%= order.updated_at.to_date %></p>
     <% else %>
       <%= link_to 'Order #', order_pay_path(order) %> <%= order.id %>
-      <p>Order date <%= order.updated_at %></p>
+      <p>Order date <%= order.created_at.to_date %></p>
     <% end %>
     <br>
     <table class='table'>
@@ -42,8 +42,10 @@
         <td>
           <% if order.status == 'paid' %>
             <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
+          <% elsif Time.now < order.created_at + 1.day %>
+            <%= link_to 'unpaid', order_pay_path(order), class: 'btn btn-outline-secondary btn-sm' %>
           <% else %>
-            <%= link_to 'unpaid', order_pay_path(order), class: 'btn btn-outline-danger btn-sm' %>
+            <%= link_to 'canceled', order_paid_path(order), class: 'btn btn-outline-danger btn-sm' %>
           <% end %>
         </td>
       </tr>
