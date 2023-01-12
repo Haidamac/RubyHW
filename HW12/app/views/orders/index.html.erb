@@ -1,0 +1,56 @@
+<% if current_user %>
+  <br>
+  <h2><svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' fill='currentColor' class='bi bi-bag-heart-fill' viewBox='0 0 16 16'>
+    <path d='M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z'/>
+  </svg>
+    History of your orders:</h2>
+
+  <% @orders.each do |order| %>
+    <% if order.status == 'paid' %>
+      <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
+      <p>Date of purchase <%= order.updated_at.to_date %></p>
+    <% else %>
+      <%= link_to 'Order #', order_pay_path(order) %> <%= order.id %>
+      <p>Order date <%= order.created_at.to_date %></p>
+    <% end %>
+    <br>
+    <table class='table'>
+      <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+      <% order.cart.line_item.each_with_index do |line_item, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
+          <td><%= line_item.product.name %></td>
+          <td><%= line_item.quantity %></td>
+          <td><%= number_to_currency line_item.price * line_item.quantity %></td>
+          <td></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Total price:</b></td>
+        <td><b><%= number_to_currency order.order_price %></b></td>
+        <td>
+          <% if order.status == 'paid' %>
+            <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
+          <% elsif Time.now < order.created_at + 1.day %>
+            <%= link_to 'unpaid', order_pay_path(order), class: 'btn btn-outline-secondary btn-sm' %>
+          <% else %>
+            <%= link_to 'canceled', order_paid_path(order), class: 'btn btn-outline-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  <h3>Please SignIn or SignUp!</h3>
+<% end %>

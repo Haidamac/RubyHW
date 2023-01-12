@@ -1,0 +1,17 @@
+<% @products.each do |product| %>
+  <%= link_to product, class: 'card p-0 mt-3 mx-auto shadow-sm' do %>
+    <%= image_tag image_url(product.image), class: 'card-img-top', alt: product.name %>
+    <div class='card-body px'>
+      <h5 class='card-title text-center'><%= product.name %></h5>
+      <p class='card-price mt-auto text-end'><%= number_to_currency(product.price) %></p>
+      <% if current_user %>
+        <%if !current_cart.line_item.where(product_id: product.id).present?%>
+          <!-- Add to Cart -->
+          <%= button_to 'Add to cart', line_items_path(product_id: product.id), class: 'btn btn-light btn-sm' %>
+        <%else %>
+          <%= button_to 'Checkout', orders_path, class: 'btn btn-light btn-sm' %>
+        <%end%>
+      <%end%>
+    </div>
+  <% end %>
+<% end %>
