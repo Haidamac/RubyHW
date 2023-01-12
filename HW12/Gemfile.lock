@@ -82,6 +82,10 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
+    annotate_models (1.0.1)
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -329,6 +333,8 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activeadmin (~> 2.13, >= 2.13.1)
+  annotate
+  annotate_models (~> 1.0, >= 1.0.1)
   bootsnap
   bootstrap (~> 5.2, >= 5.2.3)
   cssbundling-rails (~> 1.1, >= 1.1.2)
