@@ -3,22 +3,22 @@ class LineItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-    current_cart.add_product(product)
+    current_order.add_product(product)
 
-    redirect_to cart_path, notice: "#{product.name} was successfully added to the cart"
+    redirect_to current_order_path, notice: "#{product.name} was successfully added to the cart"
   end
 
   def destroy
     set_line_item
     @line_item.destroy
-    redirect_back(fallback_location: current_cart)
+    redirect_back(fallback_location: current_order)
   end
 
   def add_quantity
     set_line_item
     @line_item.quantity += 1
     @line_item.save
-    redirect_back(fallback_location: current_cart)
+    redirect_back(fallback_location: current_order)
   end
 
   def reduce_quantity
@@ -26,7 +26,7 @@ class LineItemsController < ApplicationController
     if @line_item.quantity > 1
       @line_item.quantity -= 1
       @line_item.save
-      redirect_back(fallback_location: current_cart)
+      redirect_back(fallback_location: current_order)
     elsif @line_item.quantity == 1
       destroy
     end

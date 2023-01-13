@@ -5,16 +5,22 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.all if current_user
   end
 
-  def create
-    order = current_user.orders.create(cart: current_cart)
-    cookies.delete(:cart_id)
-    redirect_to order_path(order), notice: 'Order was successfully created'
+  def show
+    if (Time.now > @order.created_at + 1.day) & @order.status == 'unpaid'
+      @order.update(status: :canceled)
+
+      redirect_to order_paid_path, notice: 'Your order is canceled, because it was created too long ago and unfinished'
+    end
   end
 
-  def show; end
+  def show_current
+    @order = current_order
+    id = current_order.id
+  end
 
   def pay_details
     @order_id = @order.id if current_user
+    cookies.delete(:order_id)
   end
 
   def pay
