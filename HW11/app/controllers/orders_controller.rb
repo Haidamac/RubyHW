@@ -11,7 +11,13 @@ class OrdersController < ApplicationController
     redirect_to order_path(order), notice: 'Order was successfully created'
   end
 
-  def show; end
+  def show
+    if (Time.now > @order.created_at + 1.day) & @order.status == 'unpaid'
+      @order.update(status: :canceled)
+
+      redirect_to order_paid_path, notice: 'Your order is canceled, because it was created too long ago and unfinished'
+    end
+  end
 
   def pay_details
     @order_id = @order.id if current_user
