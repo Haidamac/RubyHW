@@ -18,7 +18,8 @@
 #
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :line_items, dependent: :nullify
+  has_many :line_items, dependent: :destroy
+
   enum status: { unpaid: 0, paid: 1, canceled: 2 }
 
   def add_product(product)

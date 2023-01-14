@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_line_item, only: %i[destroy add_quantity reduce_quantity]
 
   def create
     product = Product.find(params[:product_id])
@@ -9,20 +10,17 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    set_line_item
     @line_item.destroy
     redirect_back(fallback_location: current_order)
   end
 
   def add_quantity
-    set_line_item
     @line_item.quantity += 1
     @line_item.save
     redirect_back(fallback_location: current_order)
   end
 
   def reduce_quantity
-    set_line_item
     if @line_item.quantity > 1
       @line_item.quantity -= 1
       @line_item.save
