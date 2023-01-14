@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def order_products_quantity
-    current_order.line_items.map(&:quantity).sum
+    current_order.line_items.includes(:product).sum(&:quantity)
   end
 end

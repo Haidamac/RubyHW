@@ -14,10 +14,11 @@ Rails.application.routes.draw do
   root 'products#index'
   get '/current_order', to: 'orders#show_current', as: :current_order
   resources :orders, only: %i[index show]
-  post 'line_items' => 'line_items#create'
-  get 'line_items/:id' => 'line_items#destroy', as: 'line_item'
-  get 'line_items/:id/add' => 'line_items#add_quantity', as: 'line_item_add'
-  get 'line_items/:id/reduce' => 'line_items#reduce_quantity', as: 'line_item_reduce'
+  resources :line_items, only: %i[create update destroy]
+  # post 'line_items' => 'line_items#create'
+  # get 'line_items/:id' => 'line_items#destroy', as: 'line_item'
+  # get 'line_items/:id/add' => 'line_items#add_quantity', as: 'line_item_add'
+  # get 'line_items/:id/reduce' => 'line_items#reduce_quantity', as: 'line_item_reduce'
   get 'orders/:id/pay_details' => 'orders#pay_details', as: 'order_pay_details'
   put 'orders/:id/pay' => 'orders#pay', as: 'order_pay'
   get 'orders/:id/paid' => 'orders#paid', as: 'order_paid'
