@@ -72,6 +72,12 @@ gem 'popper', '~> 0.5.3'
 # The most popular HTML, CSS, and JavaScript framework for developing responsive
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 
+# ODM Framework for MongoDB
+gem 'mongoid', '~> 7.5', '>= 7.5.2'
+
+# help to kill N+1 queries and unused eager loading
+gem 'bullet', '~> 7.0', '>= 7.0.7'
+
 # RuboCop is a Ruby static code analyzer (a.k.a. linter) and code formatter.
 gem 'rubocop', require: false
 

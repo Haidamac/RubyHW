@@ -100,7 +100,11 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
+    bson (4.15.0)
     builder (3.2.4)
+    bullet (7.0.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.1.10)
@@ -184,6 +188,12 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.16.3)
+    mongo (2.18.2)
+      bson (>= 4.14.1, < 5.0.0)
+    mongoid (7.5.2)
+      activemodel (>= 5.1, < 7.1, != 7.0.0)
+      mongo (>= 2.10.5, < 3.0.0)
+      ruby2_keywords (~> 0.0.5)
     msgpack (1.6.0)
     net-imap (0.3.4)
       date
@@ -315,6 +325,7 @@ GEM
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.3.0)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -337,6 +348,7 @@ DEPENDENCIES
   annotate_models (~> 1.0, >= 1.0.1)
   bootsnap
   bootstrap (~> 5.2, >= 5.2.3)
+  bullet (~> 7.0, >= 7.0.7)
   cssbundling-rails (~> 1.1, >= 1.1.2)
   debug
   devise (~> 4.8, >= 4.8.1)
@@ -344,6 +356,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails (~> 1.1, >= 1.1.5)
   jbuilder
+  mongoid (~> 7.5, >= 7.5.2)
   pagy (~> 5.10)
   pg (~> 1.1)
   popper (~> 0.5.3)
