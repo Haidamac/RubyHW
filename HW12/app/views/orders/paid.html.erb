@@ -12,7 +12,7 @@
     <h3><%= link_to 'Please, repeat your order!', root_path %></h3>
   <% end %>
   <br>
-  <%= render partial: 'order_history' %>
+  <%= render partial: 'order_history', locals: { order: @order } %>
 <% else %>
   <h3>Please SignIn or SignUp!</h3>
 <% end %>
