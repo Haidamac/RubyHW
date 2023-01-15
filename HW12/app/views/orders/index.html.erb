@@ -6,19 +6,11 @@
     History of your orders:</h2>
 
   <% @orders.each do |order| %>
-      Order # <%= order.id %>
-      <% if order.paid? %>
-        <span>Date of purchase <%= order.updated_at.to_date %></span><span class="ms-3">Status:
-          <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %></span>
-      <% elsif Time.now < order.created_at + 1.day %>
-        <span>Order date <%= order.created_at.to_date %></span><span class="ms-3">Status:
-          <%= link_to 'unpaid', order_path(order), class: 'btn btn-outline-danger btn-sm' %></span>
-      <% else %>
-        <span>Order date <%= order.created_at.to_date %></span><span class="ms-3">Status:
-          <%= link_to 'canceled', order_path(order), class: 'btn btn-outline-secondary btn-sm' %></span>
-      <% end %>
-      <br>
-      <%= render partial: 'order_history', locals: { order: order } %>
+    <h5>Order # <%= order.id %></h5>
+    <span><%= order_date(order) %></span>
+    <span class="ms-3"><%= order_status_button(order) %></span>
+    <br>
+    <%= render partial: 'order_history', locals: { order: order } %>
   <% end %>
 <% else %>
   <h3>Please SignIn or SignUp!</h3>
