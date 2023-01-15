@@ -19,15 +19,17 @@
       <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
       <td><%= line_item.product.name %></td>
       <td>
-        <!-- reduce -->
-        <%=link_to line_item_reduce_path(:id => line_item) , method: :put, class: 'btn btn-outline-danger btn-sm', style: 'padding-left:11px; padding-right:11px;' do %>
-          <span><b>-</b></span>
-        <% end %>
-        <%= line_item.quantity %>
-        <!-- add -->
-        <%=link_to line_item_add_path(:id => line_item) , method: :put , class: 'btn btn-outline-success btn-sm', style: 'padding-left:9px; padding-right:9px;' do %>
-          <span><b>+</b></span>
-        <% end %>
+        <div class="d-md-flex">
+          <!-- reduce -->
+          <%= button_to line_item_path(:id => line_item), params: { change_quantity: 'reduce' }, method: :put, class: 'btn btn-outline-danger btn-sm', style: 'padding-left:11px; padding-right:11px;' do %>
+            <span><b>-</b></span>
+          <% end %>
+          <p class='quantity'><%= line_item.quantity %></p>
+          <!-- add -->
+          <%= button_to line_item_path(:id => line_item), params: { change_quantity: 'add' }, method: :put , class: 'btn btn-outline-success btn-sm', style: 'padding-left:9px; padding-right:9px;' do %>
+            <span><b>+</b></span>
+          <% end %>
+        </div>
       </td>
       <td><%= number_to_currency line_item.price * line_item.quantity %></td>
       <td>

@@ -24,6 +24,7 @@ class LineItemsController < ApplicationController
 
     redirect_back(fallback_location: current_order)
   end
+
   def destroy
     @line_item.destroy
     redirect_back(fallback_location: current_order)

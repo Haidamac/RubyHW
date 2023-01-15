@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    if (Time.now > @order.created_at + 1.day) & @order.status == 'unpaid'
-      @order.update(status: :canceled)
+    if @order.unpaid? && (Time.now > @order.created_at + 1.day)
+      @order.canceled!
 
       redirect_to order_paid_path, notice: 'Your order is canceled, because it was created too long ago and unfinished'
     end
@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
 
   def show_current
     @order = current_order
-    id = current_order.id
   end
 
   def pay_details
@@ -24,16 +23,14 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    @order.update(status: :paid)
+    @order.paid!
     @user_email = current_user.email
     @order_id = @order.id
     UserMailer.welcome.deliver_now
     redirect_to order_paid_path, method: :get, notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
   end
 
-  def paid
-    # cookies.delete(:cart_id)
-  end
+  def paid; end
 
   private
 
