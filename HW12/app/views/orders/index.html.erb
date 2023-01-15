@@ -7,12 +7,16 @@
 
   <% @orders.each do |order| %>
     <% if !order.total_price.zero? %>
+      Order # <%= order.id %>
       <% if order.paid? %>
-        <%= link_to 'Order #', order_paid_path(order) %> <%= order.id %>
-        <p>Date of purchase <%= order.updated_at.to_date %></p>
+        <span>Date of purchase <%= order.updated_at.to_date %></span><span class="ms-3">Status:
+          <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %></span>
+      <% elsif Time.now < order.created_at + 1.day %>
+        <span>Order date <%= order.created_at.to_date %></span><span class="ms-3">Status:
+          <%= link_to 'unpaid', order_path(order), class: 'btn btn-outline-danger btn-sm' %></span>
       <% else %>
-        <%= link_to 'Order #', order_path(order) %> <%= order.id %>
-        <p>Order date <%= order.created_at.to_date %></p>
+        <span>Order date <%= order.created_at.to_date %></span><span class="ms-3">Status:
+          <%= link_to 'canceled', order_path(order), class: 'btn btn-outline-secondary btn-sm' %></span>
       <% end %>
       <br>
       <table class='table'>
@@ -22,8 +26,8 @@
           <th>Name</th>
           <th>Quantity</th>
           <th>Price</th>
-          <th>Status</th>
         </tr>
+        <% @sum_order = 0 %>
         <% order.line_items.includes([:product]).each_with_index do |line_item, index| %>
           <tr>
             <td><%= index+1 %></td>
@@ -31,24 +35,16 @@
             <td><%= line_item.product.name %></td>
             <td><%= line_item.quantity %></td>
             <td><%= number_to_currency line_item.price * line_item.quantity %></td>
-            <td></td>
           </tr>
+          <% @sum_order += line_item.price * line_item.quantity %>
         <% end %>
         <tr>
           <td></td>
           <td></td>
           <td></td>
           <td><b>Total price:</b></td>
-          <td><b><%= number_to_currency order.total_price %></b></td>
-          <td>
-            <% if order.paid? %>
-              <%= link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm' %>
-            <% elsif Time.now < order.created_at + 1.day %>
-              <%= link_to 'unpaid', order_path(order), class: 'btn btn-outline-danger btn-sm' %>
-            <% else %>
-              <%= link_to 'canceled', order_path(order), class: 'btn btn-outline-secondary btn-sm' %>
-            <% end %>
-          </td>
+          <td><b>
+            <%= number_to_currency @sum_order %></b></td>
         </tr>
       </table>
     <% end %>
