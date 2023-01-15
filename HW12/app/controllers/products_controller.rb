@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
-    render json: { message: 'product not found' }, status: :not_found
+    redirect_to root_path, method: :get, notice: 'Ooops! Product not found :('
   end
 
   def product_params

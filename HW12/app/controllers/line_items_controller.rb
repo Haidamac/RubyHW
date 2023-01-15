@@ -37,6 +37,6 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
-    render json: { message: 'line_item id not found' }, status: :not_found
+    redirect_to current_order_path, method: :get, notice: 'Ooops! Please try again'
   end
 end
