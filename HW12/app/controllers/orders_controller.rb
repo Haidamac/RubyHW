@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[show pay_details pay paid]
+  before_action :set_order, only: %i[show pay_details pay paid destroy]
 
   def index
-    @orders = current_user.orders.all if current_user
+    @orders = current_user.orders.where.not(status: 'empty') if current_user
   end
 
   def show
@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
     @order = current_user.orders.find(params[:id]) if current_user
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
-    render json: { message: 'order id not found' }, status: :not_found
+    cookies.delete(:order_id)
+    redirect_to current_order_path, method: :get, notice: 'Ooops! Please try again'
   end
 end

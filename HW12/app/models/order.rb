@@ -20,7 +20,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :line_items, dependent: :destroy
 
-  enum status: { unpaid: 0, paid: 1, canceled: 2 }
+  enum :status, %i[empty unpaid paid canceled], default: :empty
 
   def add_product(product)
     line_items.create(product: product, quantity: 1, price: product.price)

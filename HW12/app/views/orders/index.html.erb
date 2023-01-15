@@ -6,7 +6,6 @@
     History of your orders:</h2>
 
   <% @orders.each do |order| %>
-    <% if !order.total_price.zero? %>
       Order # <%= order.id %>
       <% if order.paid? %>
         <span>Date of purchase <%= order.updated_at.to_date %></span><span class="ms-3">Status:
@@ -20,7 +19,6 @@
       <% end %>
       <br>
       <%= render partial: 'order_history', locals: { order: order } %>
-    <% end %>
   <% end %>
 <% else %>
   <h3>Please SignIn or SignUp!</h3>

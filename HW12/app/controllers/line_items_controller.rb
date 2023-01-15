@@ -12,6 +12,7 @@ class LineItemsController < ApplicationController
       @line_item = current_order.add_product(product)
     end
 
+    current_order.unpaid!
     redirect_to current_order_path, notice: "#{product.name} was successfully added to the cart"
   end
 
