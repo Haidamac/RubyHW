@@ -6,16 +6,14 @@
     <th>Quantity</th>
     <th>Price</th>
   </tr>
-  <% @sum_order = 0 %>
   <% order.line_items.includes([:product]).each_with_index do |line_item, index| %>
   <tr>
     <td><%= index+1 %></td>
     <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
     <td><%= line_item.product.name %></td>
     <td><%= line_item.quantity %></td>
-    <td><%= number_to_currency line_item.price * line_item.quantity %></td>
+    <td><%= number_to_currency line_item.line_item_total_price %></td>
   </tr>
-    <% @sum_order += line_item.price * line_item.quantity %>
 <% end %>
   <tr>
     <td></td>
@@ -23,6 +21,6 @@
     <td></td>
     <td><b>Total price:</b></td>
     <td><b>
-      <%= number_to_currency @sum_order %></b></td>
+      <%= number_to_currency order.total_price %></b></td>
   </tr>
 </table>
