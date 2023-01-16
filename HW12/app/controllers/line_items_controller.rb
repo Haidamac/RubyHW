@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class LineItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_line_item, only: %i[update destroy]
 
   def create
     product = Product.find(params[:product_id])
-    @line_item = current_order.line_items.find_by(product: product)
+    @line_item = current_order.line_items.find_by(product:)
 
     if @line_item
       @line_item.update(quantity: @line_item.quantity + 1)

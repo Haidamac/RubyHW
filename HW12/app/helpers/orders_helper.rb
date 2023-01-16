@@ -1,5 +1,6 @@
-module OrdersHelper
+# frozen_string_literal: true
 
+module OrdersHelper
   def order_date(order)
     if order.paid?
       "Date of purchase #{order.updated_at.to_date}"

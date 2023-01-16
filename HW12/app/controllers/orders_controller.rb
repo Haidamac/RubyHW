@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show pay_details pay paid]
 
@@ -32,7 +34,8 @@ class OrdersController < ApplicationController
     @user_email = current_user.email
     @order_id = @order.id
     UserMailer.welcome.deliver_now
-    redirect_to order_paid_path, method: :get, notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
+    redirect_to order_paid_path, method: :get,
+                                 notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
   end
 
   def paid; end
