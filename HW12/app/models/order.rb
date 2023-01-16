@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # == Schema Information
 #
 # Table name: orders
@@ -20,7 +21,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :line_items, dependent: :destroy
 
-  enum :status, %i[empty unpaid paid canceled], default: :empty
+  enum :status, { empty: 0, unpaid: 1, paid: 2, canceled: 3 }, default: 0
 
   def add_product(product)
     line_items.create(product: product, quantity: 1, price: product.price)

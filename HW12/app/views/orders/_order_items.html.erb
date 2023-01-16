@@ -7,7 +7,7 @@
     <th>Price</th>
     <th>Delete</th>
   </tr>
-  <% @order.line_items.includes([:product]).each_with_index do |line_item, index| %>
+  <% @line_items.includes([:product]).each_with_index do |line_item, index| %>
   <tr>
     <td><%= index+1 %></td>
     <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
