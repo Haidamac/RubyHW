@@ -6,7 +6,8 @@ ActiveAdmin.register Order do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :cart_id, :user_id, :status
+  permit_params :user_id, :status
+  includes :user
   #
   # or
   #
