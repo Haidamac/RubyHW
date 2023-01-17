@@ -13,7 +13,7 @@
     <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
     <td><%= line_item.product.name %></td>
     <td>
-      <div class="d-md-flex">
+      <div class='d-md-flex'>
         <!-- reduce -->
         <%= button_to line_item_path(:id => line_item), params: { change_quantity: 'reduce' }, method: :put, class: 'btn btn-outline-danger btn-sm', style: 'padding-left:11px; padding-right:11px;' do %>
           <span><b>-</b></span>

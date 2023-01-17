@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
-    @orders = current_user.orders.not_empty if current_user
+    current_user.orders.includes(:line_items).each do |order|
+      order.destroy if order.unpaid? && order.total_price.zero?
+    end
+    @orders = current_user.orders.not_empty
   end
 
   def show
