@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def index
     current_user.orders.includes(:line_items).each do |order|
-      order.destroy if order.unpaid? && order.total_price.zero?
+      order.destroy if order.total_price.zero?
     end
     @orders = current_user.orders.not_empty
   end
