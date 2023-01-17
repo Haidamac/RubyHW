@@ -14,7 +14,7 @@ git clone https://github.com/Haidamac/RubyHW.git
 ```
 
 ```ruby
-cd RubyHW/HW11
+cd RubyHW/HW12
 ````
 
 ```ruby
