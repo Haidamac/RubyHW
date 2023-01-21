@@ -36,9 +36,10 @@ class OrdersController < ApplicationController
   def pay
     @order.paid!
     user = current_user
+    order = @order
     @user_email = current_user.email
     @order_id = @order.id
-    UserMailer.new_order(user).deliver_now
+    UserMailer.new_order(user, order).deliver_now
     redirect_to order_paid_path, method: :get,
                                  notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
   end
