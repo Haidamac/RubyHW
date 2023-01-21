@@ -7,6 +7,10 @@ Install Node.js:
 sudo apt-get install nodejs
 ````
 
+Install libvips:
+- for UNIX-like systems check your package manager
+- for macOS or Windows systems see instruction here https://www.libvips.org/install.html
+
 Type in console:
 
 ```ruby
