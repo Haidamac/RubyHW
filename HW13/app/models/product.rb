@@ -6,7 +6,6 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text
-#  image       :string
 #  name        :string
 #  price       :decimal(, )
 #  created_at  :datetime         not null
