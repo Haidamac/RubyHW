@@ -10,7 +10,7 @@
   <% @line_items.includes([:product]).each.with_index do |line_item, index| %>
   <tr>
     <td><%= index+1 %></td>
-    <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>
+    <td><%= image_tag line_item.product.image.variant(:thumb) %> </td>
     <td><%= line_item.product.name %></td>
     <td>
       <div class='d-md-flex'>
