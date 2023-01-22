@@ -11,6 +11,10 @@ Install libvips:
 - for UNIX-like systems check your package manager
 - for macOS or Windows systems see instruction here https://www.libvips.org/install.html
 
+```ruby
+sudo apt install imagemagick libvips
+```
+
 Type in console:
 
 ```ruby
