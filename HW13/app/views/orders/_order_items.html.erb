@@ -7,10 +7,14 @@
     <th>Price</th>
     <th>Delete</th>
   </tr>
-  <% @line_items.includes([:product]).each.with_index do |line_item, index| %>
+  <% @line_items.includes(product: :image_attachment).each.with_index do |line_item, index| %>
   <tr>
     <td><%= index+1 %></td>
-    <td><%= image_tag line_item.product.image.variant(:thumb) %> </td>
+    <% if line_item.product.image.attached?  %>
+      <td><%= image_tag line_item.product.image.variant(:thumb) %> </td>
+    <% else %>
+      <td><%= image_tag("no_image_thumb.png", alt: 'No Image') %></td>
+    <% end %>
     <td><%= line_item.product.name %></td>
     <td>
       <div class='d-md-flex'>
