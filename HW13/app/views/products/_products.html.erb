@@ -1,4 +1,4 @@
-<% @products.includes(image_attachment: :blob).each do |product| %>
+<% @products.each do |product| %>
   <%= link_to product, class: 'card p-0 mt-3 mx-auto shadow-sm' do %>
     <% if product.image.attached?  %>
       <%= image_tag product.image, class: 'card-img-top', alt: product.name %>

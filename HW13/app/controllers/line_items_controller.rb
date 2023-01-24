@@ -6,7 +6,7 @@ class LineItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-    @line_item = current_order.line_items.find_by(product:)
+    @line_item = current_order.line_items.includes(:product).find_by(product:)
 
     if @line_item
       @line_item.update(quantity: @line_item.quantity + 1)
@@ -36,7 +36,7 @@ class LineItemsController < ApplicationController
   private
 
   def set_line_item
-    @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.includes(:product).find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
     redirect_to current_order_path, method: :get, notice: 'Ooops! Please try again'

@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show]
 
   def index
-    @products = Product.all
+    @products = Product.all.with_attached_image
   end
 
   def show
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.with_attached_image.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
     redirect_to root_path, method: :get, notice: 'Ooops! Product not found :('

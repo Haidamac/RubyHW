@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   enum :status, { empty: 0, unpaid: 1, paid: 2, canceled: 3 }, default: 0
 
   def add_product(product)
-    line_items.create(product:, quantity: 1, price: product.price)
+    line_items.includes(:product).create(product:, quantity: 1, price: product.price)
   end
 
   def total_price

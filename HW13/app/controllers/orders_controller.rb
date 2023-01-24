@@ -5,14 +5,14 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
-    current_user.orders.includes([:line_items]).each do |order|
+    current_user.orders.includes(:line_items).each do |order|
       order.destroy if order.total_price.zero?
     end
     @orders = current_user.orders.not_empty
   end
 
   def show
-    @line_items = @order.line_items
+    @line_items = @order.line_items.includes(:product)
     if @order.unpaid? && (Time.now > @order.created_at + 1.day)
       @order.canceled!
 
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 
   def show_current
     @order = current_order
-    @line_items = current_order.line_items
+    @line_items = current_order.line_items.includes(:product)
   end
 
   def pay_details

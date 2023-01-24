@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: :show
 
   def show
-    @products = @category.products
+    @products = @category.products.with_attached_image
     @breadcrumb = @category
   end
 
