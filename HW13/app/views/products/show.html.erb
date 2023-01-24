@@ -11,7 +11,7 @@
   <div class='row g-0'>
     <div class='col-md-4'>
       <% if @product.image.attached?  %>
-        <%= image_tag @product.image, class: 'img-fluid rounded-start', alt: @product.name %>
+        <%= image_tag @product.image.variant(:main), class: 'img-fluid rounded-start', alt: @product.name %>
       <% else %>
         <%= image_tag("no_image.png", class: 'card-img-top', alt: 'No Image') %>
       <% end %>

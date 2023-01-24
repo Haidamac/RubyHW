@@ -1,7 +1,7 @@
 <% @products.each do |product| %>
   <%= link_to product, class: 'card p-0 mt-3 mx-auto shadow-sm' do %>
     <% if product.image.attached?  %>
-      <%= image_tag product.image, class: 'card-img-top', alt: product.name %>
+      <%= image_tag product.image.variant(:main), class: 'card-img-top', alt: product.name %>
     <% else %>
       <%= image_tag("no_image.png", class: 'card-img-top', alt: 'No Image') %>
     <% end %>
