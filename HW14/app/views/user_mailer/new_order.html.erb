@@ -1,0 +1,11 @@
+<h3>Dear <%= @user.email %> </h3>
+<h3>Thanks So Much for Your Order! We Hope You Enjoy Your New Purchase!</h3>
+
+<p>Your Order #<%= @order.id %> successfully paid!</p>
+<h5><i>Details of your order:</i></h5>
+<div style='text-align: center;'>
+  <%= render partial: '/orders/order_history', locals: { order: @order } %>
+</div>
+<h5>Grateful to Have You as a Customer!</h5>
+<h5><i>Dionysus Store Team</i></h5>
+
