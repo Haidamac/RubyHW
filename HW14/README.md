@@ -22,7 +22,7 @@ git clone https://github.com/Haidamac/RubyHW.git
 ```
 
 ```ruby
-cd RubyHW/HW13
+cd RubyHW/HW14
 ````
 
 ```ruby
