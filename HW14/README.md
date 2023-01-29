@@ -15,6 +15,11 @@ Install libvips:
 sudo apt install imagemagick libvips
 ```
 
+Install Redis server:
+```ruby
+sudo apt install redis-server
+```
+
 Type in console:
 
 ```ruby
