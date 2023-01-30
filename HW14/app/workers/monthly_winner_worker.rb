@@ -3,6 +3,7 @@
 require 'sidekiq-scheduler'
 
 class MonthlyWinnerWorker
+  # include Sidekiq::Worker
   include Sidekiq::Worker
 
   def perform

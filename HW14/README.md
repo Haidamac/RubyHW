@@ -105,7 +105,7 @@ or attach your own images
 
 Run Sidekiq
 ```ruby
-bundle exec sidekiq
+bundle exec sidekiq -C config/sidekiq.yml
 ```
 
 Run Sidekiq panel in browser:

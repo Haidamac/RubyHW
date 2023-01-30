@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Your order in Dionysus Store')
   end
 
-  def winner(user)
+  def monthly_winner(user)
     @user = user
     mail(to: @user.email, subject: 'Congratulation! You won on Dionysus Store')
   end
