@@ -15,7 +15,7 @@ Install libvips:
 sudo apt install imagemagick libvips
 ```
 
-Install Redis server:
+Install Redis server (Redis 6.2 or greater):
 ```ruby
 sudo apt install redis-server
 ```
@@ -102,3 +102,13 @@ id 14 https://winetime.com.ua/uploads/public/goods/15337/51781796161_d588de57e9_
 id 15 https://winetime.com.ua/uploads/public/goods/13807/51205616107_daf643dd53_b_502_378.webp
 
 or attach your own images
+
+Run Sidekiq
+```ruby
+bundle exec sidekiq
+```
+
+Run Sidekiq panel in browser:
+```ruby
+http://127.0.0.1:3000/admin/sidekiq
+```

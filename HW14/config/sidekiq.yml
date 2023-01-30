@@ -1,8 +1,9 @@
 :scheduler:
   :schedule:
     set_monthly_winner:
-      cron: "0 0 1 * *" # At midnight on 1st day of every month
+#      cron: "0 0 1 * * Europe/Kiev" # At midnight on 1st day of every month Kyiv time-zone
 #      cron: '0 0 * * * *' # hourly
+      cron: "00 17 30 * * Europe/Kiev"
       class: "MonthlyWinnerWorker"
       queue: "default"
       description: "Run service monthly to determine two winners among users who made orders last month"
