@@ -1,0 +1,40 @@
+<h3>Dear <%= @user.email %> </h3>
+<h3>Thanks So Much for Your Order! We Hope You Enjoy Your New Purchase!</h3>
+
+<p>Your Order #<%= @order.id %> successfully paid!</p>
+<h5><i>Details of your order:</i></h5>
+<div>
+  <table style='margin: 5px'>
+    <tr>
+      <th>#</th>
+      <th style='width: 150px;'>Image</th>
+      <th style='width: 500px;'>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <% @order.line_items.includes(product: :image_attachment).each.with_index do |line_item, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <% if line_item.product.image.attached?  %>
+          <td style='text-align: center;'><%= image_tag line_item.product.image.variant(:thumb) %> </td>
+        <% else %>
+          <td style='text-align: center;'><%= image_tag("no_image_thumb.png", alt: 'No Image') %></td>
+        <% end %>
+        <td><%= line_item.product.name %></td>
+        <td style='text-align: center;'><%= line_item.quantity %></td>
+        <td style='text-align: right;'><%= number_to_currency(line_item.line_item_total_price) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><b>Total price:</b></td>
+      <td style='text-align: right;'><b>
+        <%= number_to_currency(@order.total_price) %></b></td>
+    </tr>
+  </table>
+</div>
+<h5>Grateful to Have You as a Customer!</h5>
+<h5><i>Dionysus Store Team</i></h5>
+
