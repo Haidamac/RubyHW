@@ -2,7 +2,9 @@
 
 class LineItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_line_item, only: %i[update destroy]
+  before_action :set_line_item, only: %i[show update destroy]
+
+  def show; end
 
   def create
     product = Product.find(params[:product_id])
@@ -15,7 +17,8 @@ class LineItemsController < ApplicationController
     end
 
     current_order.unpaid!
-    redirect_to current_order_path, notice: "#{product.name} was successfully added to the cart"
+    redirect_to line_item_path(id: @line_item.id), notice: "#{product.name} was successfully added to the cart"
+    # redirect_to current_order_path, notice: "#{product.name} was successfully added to the cart"
   end
 
   def update
@@ -25,7 +28,9 @@ class LineItemsController < ApplicationController
       @line_item.quantity > 1 ? @line_item.update(quantity: @line_item.quantity - 1) : @line_item.destroy
     end
 
-    redirect_back(fallback_location: current_order)
+    redirect_to line_item_path(id: @line_item.id)
+    # redirect_back(fallback_location: line_item_path)
+    # redirect_back
   end
 
   def destroy
