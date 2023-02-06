@@ -17,7 +17,7 @@ class LineItemsController < ApplicationController
     end
 
     current_order.unpaid!
-    redirect_to line_item_path(id: @line_item.id), notice: "#{product.name} was successfully added to the cart"
+    redirect_to line_item_path(id: @line_item.id)
   end
 
   def update
