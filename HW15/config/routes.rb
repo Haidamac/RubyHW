@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get '/current_order', to: 'orders#show_current', as: :current_order
   resources :orders, only: %i[index show]
   resources :line_items, only: %i[show create update destroy]
-  put 'line_items/:id/update_current' => 'line_items#update_current', as: 'line_item_order'
+  put 'line_items/:id/update_order' => 'line_items#update_order', as: 'line_item_order'
   get 'orders/:id/pay_details' => 'orders#pay_details', as: 'order_pay_details'
   put 'orders/:id/pay' => 'orders#pay', as: 'order_pay'
   get 'orders/:id/paid' => 'orders#paid', as: 'order_paid'

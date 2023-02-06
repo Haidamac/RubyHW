@@ -10,9 +10,9 @@
   <%= button_to line_item_path(:id => @line_item), params: { change_quantity: 'reduce' }, method: :put, class: 'btn btn-outline-danger btn-sm', style: 'padding-left:11px; padding-right:11px;' do %>
     <span><b>-</b></span>
   <% end %>
-  <p class='quantity'><%= line_item.quantity %></p>
+  <p class='quantity'><%= @line_item.quantity %></p>
   <!-- add -->
-  <%= button_to line_item_path(:id => line_item), params: { change_quantity: 'add' }, method: :put , class: 'btn btn-outline-success btn-sm', style: 'padding-left:9px; padding-right:9px;' do %>
+  <%= button_to line_item_path(:id => @line_item), params: { change_quantity: 'add' }, method: :put , class: 'btn btn-outline-success btn-sm', style: 'padding-left:9px; padding-right:9px;' do %>
     <span><b>+</b></span>
   <% end %>
 </div>
