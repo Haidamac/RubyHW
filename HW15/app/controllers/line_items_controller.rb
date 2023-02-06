@@ -16,14 +16,22 @@ class LineItemsController < ApplicationController
       @line_item = current_order.add_product(product)
     end
 
+    @product = product
+
     current_order.unpaid!
-    redirect_to line_item_path(id: @line_item.id)
+    respond_to do |format|
+      format.html { redirect_to line_item_path(id: @line_item.id) }
+      format.turbo_stream
+    end
   end
 
   def update
     change_quantity
 
-    redirect_to line_item_path(id: @line_item.id)
+    respond_to do |format|
+      format.html { redirect_to line_item_path(id: @line_item.id) }
+      format.turbo_stream
+    end
   end
 
   def update_order
@@ -47,6 +55,7 @@ class LineItemsController < ApplicationController
   end
 
   def change_quantity
+    @product = @line_item.product
     if params[:change_quantity] == 'add'
       @line_item.update(quantity: @line_item.quantity + 1)
     else

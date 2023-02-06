@@ -6,14 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
-    <%#= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= javascript_importmap_tags %>
   </head>
   <body>
 
   <div class='container-fluid vh-100'>
     <div class='row vh-100'>
-      <%= render partial: 'layouts/template/navbar' %>
+      <%= turbo_frame_tag "quantity_frame" do %>
+        <%= render partial: 'layouts/template/navbar' %>
+      <% end %>
       <%= render partial: 'layouts/template/sidebar' %>
       <div class='col-10 vh-100 p-0'>
         <%= yield %>

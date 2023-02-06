@@ -22,7 +22,7 @@
         <p class='card-text'><%= @product.description %></p>
         <p class='text-end'><i>Category: <%= @product.category.title %></i></p>
         <p class='card-text'><h4 style='color:#d63384; text-align:right'>Price: <%= number_to_currency(@product.price) %></h4></p>
-        <%= turbo_frame_tag "add_to_cart_frame" do %>
+        <%= turbo_frame_tag dom_id(@product) do %>
           <%= button_to line_items_path(product_id: @product.id), class: 'btn btn-outline-danger btn-sm' do %>
             Add
             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cart4' viewBox='0 0 16 16'>
@@ -34,3 +34,5 @@
     </div>
   </div>
 </div>
+
+

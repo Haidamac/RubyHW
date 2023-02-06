@@ -1,3 +1,7 @@
-<%= turbo_frame_tag "add_to_cart_frame" do %>
-  <%= render "in_cart", line_item: @line_item %>
+<%= turbo_frame_tag dom_id(@product) do %>
+  <%= render "in_cart", product: @product %>
+<% end %>
+
+<%= turbo_frame_tag "quantity_frame" do %>
+  <%= render "/layouts/template/navbar", line_item: @line_item %>
 <% end %>

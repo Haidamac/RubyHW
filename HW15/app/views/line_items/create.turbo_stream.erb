@@ -1,0 +1,7 @@
+<%= turbo_stream.update "quantity_frame" do %>
+  <%= render "/layouts/template/navbar", line_item: @line_item %>
+<% end %>
+
+<%= turbo_stream.update dom_id(@product) do %>
+  <%= render "in_cart", product: @product %>
+<% end %>
