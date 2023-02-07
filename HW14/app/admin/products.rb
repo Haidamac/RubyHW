@@ -11,6 +11,7 @@ ActiveAdmin.register Product do
   includes image_attachment: :blob
   form do |f|
     f.inputs do
+      f.input :category
       f.input :name
       f.input :description
       f.input :price
