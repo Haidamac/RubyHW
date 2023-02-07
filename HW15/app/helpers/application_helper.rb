@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+
   def quantity_in_cart
     return if order_products_quantity.zero?
 
