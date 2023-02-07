@@ -7,21 +7,23 @@ class LineItemsController < ApplicationController
   def show; end
 
   def create
-    product = Product.find(params[:product_id])
-    @line_item = current_order.line_items.includes(:product).find_by(product:)
+    if current_user
+      product = Product.find(params[:product_id])
+      @line_item = current_order.line_items.includes(:product).find_by(product:)
+      if @line_item
+        @line_item.update(quantity: @line_item.quantity + 1)
+      else
+        @line_item = current_order.add_product(product)
+      end
+      @product = product
+      current_order.unpaid!
 
-    if @line_item
-      @line_item.update(quantity: @line_item.quantity + 1)
+      respond_to do |format|
+        format.html { redirect_to line_item_path(id: @line_item.id) }
+        format.turbo_stream
+      end
     else
-      @line_item = current_order.add_product(product)
-    end
-
-    @product = product
-
-    current_order.unpaid!
-    respond_to do |format|
-      format.html { redirect_to line_item_path(id: @line_item.id) }
-      format.turbo_stream
+      redirect_to new_user_session_path, data: { turbo: false }
     end
   end
 
