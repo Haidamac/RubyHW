@@ -27,7 +27,7 @@ a:link, a:visited  {
 }
 
 a:hover  {
-  color: #FF0000;
+  color: darkred;
 }
 
 a:active  {
@@ -64,4 +64,20 @@ a:active  {
 
 .quantity {
   margin: 5px 10px;
+}
+
+.btn-danger{
+  background-color: darkred !important;
+}
+
+.btn-danger:hover{
+  background-color: red !important;
+}
+
+.btn-success{
+  color: white !important;
+}
+
+.btn-success:hover{
+  background-color: limegreen !important;
 }

@@ -9,7 +9,7 @@
       <h5 class='card-title text-center'><%= link_to product.name, product %></h5>
       <p class='card-price mt-auto text-end'><%= number_to_currency(product.price) %></p>
       <%= turbo_frame_tag dom_id(product) do %>
-        <%= button_to line_items_path(product_id: product.id), class: 'btn btn-outline-danger btn-sm' do %>
+        <%= button_to line_items_path(product_id: product.id), class: 'btn btn-danger btn-sm' do %>
           Add
           <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cart4'
                viewBox='0 0 16 16'>
