@@ -6,7 +6,7 @@
       <div id="products" class="row products">
         <div class='row g-5 justify-content-center align-items-center vh-100 flex-wrap'>
           <% @products.each do |product| %>
-            <%= render partial: 'products/products', locals: { product: product } %>
+            <%= render partial: 'products/product', locals: { product: product } %>
           <% end %>
         </div>
       </div>
