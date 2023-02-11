@@ -10,10 +10,14 @@ class ApplicationController < ActionController::Base
   def current_order
     Order.find(cookies[:order_id])
   rescue ActiveRecord::RecordNotFound
-    @user_id = current_user.id
-    order = Order.create(user_id: @user_id)
-    cookies[:order_id] = order.id
-    order
+    if current_user
+      @user_id = current_user.id
+      order = Order.create(user_id: @user_id)
+      cookies[:order_id] = order.id
+      order
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def order_products_quantity

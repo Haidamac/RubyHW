@@ -1,3 +1,4 @@
+<% return unless current_order.line_items.where(product_id: product.id).present? %>
 <div class='d-md-flex'>
   <%= link_to current_order_path, class: 'btn btn-success btn-sm', style: 'margin-right:11px;' do %>
     In
