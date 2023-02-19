@@ -34,8 +34,5 @@ class LineItemsController < ApplicationController
 
   def set_line_item
     @line_item = LineItem.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    logger.info e
-    render json: { message: 'line_item id not found' }, status: :not_found
   end
 end

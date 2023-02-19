@@ -39,8 +39,5 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = current_user.orders.find(params[:id]) if current_user
-  rescue ActiveRecord::RecordNotFound => e
-    logger.info e
-    render json: { message: 'order id not found' }, status: :not_found
   end
 end

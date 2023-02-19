@@ -14,9 +14,6 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    logger.info e
-    render json: { message: 'category not found' }, status: :not_found
   end
 
   def category_params
