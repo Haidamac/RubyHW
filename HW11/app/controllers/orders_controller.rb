@@ -8,14 +8,16 @@ class OrdersController < ApplicationController
   def create
     order = current_user.orders.create(cart: current_cart)
     cookies.delete(:cart_id)
-    redirect_to order_path(order), notice: 'Order was successfully created'
+    flash[:notice] = 'Order was successfully created'
+    redirect_to order_path(order)
   end
 
   def show
     if (Time.now > @order.created_at + 1.day) & @order.status == 'unpaid'
       @order.update(status: :canceled)
 
-      redirect_to order_paid_path, notice: 'Your order is canceled, because it was created too long ago and unfinished'
+      flash[:notice] = 'Your order is canceled, because it was created too long ago and unfinished'
+      redirect_to order_paid_path
     end
   end
 
@@ -28,12 +30,11 @@ class OrdersController < ApplicationController
     @user_email = current_user.email
     @order_id = @order.id
     UserMailer.welcome.deliver_now
-    redirect_to order_paid_path, method: :get, notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
+    flash[:notice] = 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
+    redirect_to order_paid_path, method: :get
   end
 
-  def paid
-    # cookies.delete(:cart_id)
-  end
+  def paid; end
 
   private
 
