@@ -5,10 +5,6 @@ class Order < ApplicationRecord
   enum status: { unpaid: 0, paid: 1, canceled: 2 }
 
   def order_price
-    sum = 0
-    cart.line_items.each do |line_item|
-      sum += line_item.price * line_item.quantity
-    end
-    sum
+    cart.line_items.sum('price * quantity')
   end
 end
