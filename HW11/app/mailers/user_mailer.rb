@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  def welcome
-    mail to: @user_email, subject: 'Your order in Dionysus Store'
+  def new_order(user, order)
+    mail(to: user.email, subject: 'Your order in Dionysus Store')
   end
 end

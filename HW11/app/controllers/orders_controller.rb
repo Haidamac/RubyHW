@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
@@ -12,14 +13,7 @@ class OrdersController < ApplicationController
     redirect_to order_path(order)
   end
 
-  def show
-    if (Time.now > @order.created_at + 1.day) & @order.status == 'unpaid'
-      @order.update(status: :canceled)
-
-      flash[:notice] = 'Your order is canceled, because it was created too long ago and unfinished'
-      redirect_to order_paid_path
-    end
-  end
+  def show; end
 
   def pay_details
     @order_id = @order.id if current_user
@@ -29,7 +23,9 @@ class OrdersController < ApplicationController
     @order.update(status: :paid)
     @user_email = current_user.email
     @order_id = @order.id
-    UserMailer.welcome.deliver_now
+    user = current_user
+    order = @order
+    UserMailer.new_order(user, order).deliver_now
     flash[:notice] = 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
     redirect_to order_paid_path, method: :get
   end
@@ -39,6 +35,6 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = current_user.orders.find(params[:id]) if current_user
+    @order = current_user.orders.find(params[:id])
   end
 end
