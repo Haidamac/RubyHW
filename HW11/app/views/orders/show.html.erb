@@ -45,7 +45,7 @@
       <td></td>
       <td></td>
       <td><b>Total price:</b></td>
-      <td><b><%= number_to_currency @order.order_price %></b></td>
+      <td><b><%= number_to_currency @order.total_cart_price %></b></td>
     </tr>
   </table>
   <%= button_to order_pay_details_path, method: :get, class: 'btn btn-outline-primary' do %>

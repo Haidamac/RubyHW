@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   has_many :line_items
   enum status: { unpaid: 0, paid: 1, canceled: 2 }
 
-  def order_price
+  def total_cart_price
     cart.line_items.sum('price * quantity')
   end
 end
