@@ -23,7 +23,7 @@
         <th>Price</th>
         <th>Status</th>
       </tr>
-      <% order.cart.line_item.each_with_index do |line_item, index| %>
+      <% order.cart.line_items.each_with_index do |line_item, index| %>
         <tr>
           <td><%= index+1 %></td>
           <td><%= image_tag image_url(line_item.product.image), height: 100, width: 100 %> </td>

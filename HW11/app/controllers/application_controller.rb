@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def cart_products_quantity
-    current_cart.line_item.map(&:quantity).sum
+    current_cart.line_items.map(&:quantity).sum
   end
 end

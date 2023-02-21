@@ -6,7 +6,7 @@ class Order < ApplicationRecord
 
   def order_price
     sum = 0
-    cart.line_item.each do |line_item|
+    cart.line_items.each do |line_item|
       sum += line_item.price * line_item.quantity
     end
     sum
