@@ -65,7 +65,7 @@ gem 'popper', '~> 0.5.3'
 # The most popular HTML, CSS, and JavaScript framework for developing responsive
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 
-#efficient background processing
+# efficient background processing
 gem 'sidekiq', '~> 7.0', '>= 7.0.3'
 
 # job scheduling extension for sidekiq

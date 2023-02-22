@@ -8,15 +8,10 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    Order.find(cookies[:order_id])
-  rescue ActiveRecord::RecordNotFound
-    if current_user
-      @user_id = current_user.id
-      order = Order.create(user_id: @user_id)
-      cookies[:order_id] = order.id
-      order
+    if current_user.orders.unpaid.first.present?
+      current_user.orders.unpaid.first
     else
-      redirect_to new_user_session_path
+      current_user.orders.create(status: 1)
     end
   end
 

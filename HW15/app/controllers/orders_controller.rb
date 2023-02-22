@@ -5,10 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show pay_details pay paid]
 
   def index
-    current_user.orders.includes(:line_items).each do |order|
-      order.destroy if order.total_price.zero?
-    end
-    @orders = current_user.orders.not_empty
+    @orders = current_user.orders
   end
 
   def show
@@ -35,11 +32,9 @@ class OrdersController < ApplicationController
 
   def pay
     @order.paid!
-    user = current_user
-    order = @order
     @user_email = current_user.email
     @order_id = @order.id
-    UserMailer.new_order(user, order).deliver_now
+    UserMailer.new_order(@order.user, @order).deliver_now
     redirect_to order_paid_path, method: :get,
                                  notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
   end
@@ -49,7 +44,7 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = current_user.orders.find(params[:id]) if current_user
+    @order = current_user.orders.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     logger.info e
     cookies.delete(:order_id)
