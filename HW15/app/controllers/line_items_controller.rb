@@ -10,22 +10,18 @@ class LineItemsController < ApplicationController
   def create
     current_user.orders.create if current_order.nil?
 
-    # if current_user
     @product = Product.find(params[:product_id])
     @line_item = current_order.line_items.find_by(product: @product)
     if @line_item
       @line_item.update(quantity: @line_item.quantity + 1)
     else
-      @line_item = current_order.add_product(@product)
+      @line_item = current_order.line_items.includes(:product).create(product: @product, quantity: 1, price: @product.price)
     end
 
     respond_to do |format|
       format.html { redirect_to line_item_path(id: @line_item.id) }
       format.turbo_stream
     end
-    # else
-    #   redirect_to new_user_session_path, data: { turbo: false }
-    # end
   end
 
   def update
