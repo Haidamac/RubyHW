@@ -10,14 +10,8 @@ class OrdersController < ApplicationController
 
   def show
     @line_items = @order.line_items.includes(:product)
-    if @order.unpaid? && (Time.now > @order.created_at + 1.day)
-      @order.canceled!
 
-      redirect_to order_paid_path, notice: 'Your order is canceled, because it was created too long ago and unfinished'
-    elsif @order.paid?
-
-      redirect_to order_paid_path
-    end
+    redirect_to order_paid_path if @order.paid?
   end
 
   def show_current

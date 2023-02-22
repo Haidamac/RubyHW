@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if current_user.orders.unpaid.first.present?
       current_user.orders.unpaid.first
     else
-      current_user.orders.create(status: 1)
+      current_user.orders.create
     end
   end
 

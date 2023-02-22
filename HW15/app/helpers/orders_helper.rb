@@ -20,10 +20,8 @@ module OrdersHelper
   def order_status_button(order)
     if order.paid?
       link_to 'paid', order_paid_path(order), class: 'btn btn-outline-success btn-sm'
-    elsif Time.now < order.created_at + 1.day
-      link_to 'unpaid', order_path(order), class: 'btn btn-outline-danger btn-sm'
     else
-      link_to 'canceled', order_path(order), class: 'btn btn-outline-secondary btn-sm'
+      link_to 'unpaid', order_path(order), class: 'btn btn-outline-danger btn-sm'
     end
   end
 end

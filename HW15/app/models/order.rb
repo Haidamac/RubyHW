@@ -5,7 +5,7 @@
 # Table name: orders
 #
 #  id         :bigint           not null, primary key
-#  status     :integer          default("empty")
+#  status     :integer          default("unpaid")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint           not null
@@ -24,5 +24,5 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :line_items, dependent: :destroy
 
-  enum :status, { empty: 0, unpaid: 1, paid: 2, canceled: 3 }
+  enum :status, { unpaid: 0, paid: 1 }
 end
