@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-
   def categories_all
     @categories = Category.all
   end
