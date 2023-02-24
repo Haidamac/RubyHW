@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
 
   def pay_details
     @order_id = @order.id if current_user
-    cookies.delete(:order_id)
   end
 
   def pay
@@ -39,9 +38,5 @@ class OrdersController < ApplicationController
 
   def set_order
     @order = current_user.orders.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    logger.info e
-    cookies.delete(:order_id)
-    redirect_to current_order_path, method: :get, notice: 'Ooops! Something wrong. Please try again'
   end
 end
