@@ -16,9 +16,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.with_attached_image.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    logger.info e
-    redirect_to root_path, method: :get, notice: 'Ooops! Product not found :('
   end
 
   def product_params
