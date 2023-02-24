@@ -28,8 +28,8 @@ class OrdersController < ApplicationController
     @user_email = current_user.email
     @order_id = @order.id
     UserMailer.new_order(@order.user, @order).deliver_now
-    redirect_to order_paid_path, method: :get,
-                                 notice: 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
+    flash[:notice] = 'Thanks So Much for Your Order! I Hope You Enjoy Your New Purchase!'
+    redirect_to order_paid_path, method: :get
   end
 
   def paid; end
