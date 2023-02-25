@@ -1,0 +1,18 @@
+<%= turbo_stream_from 'products' %>
+<div class='row mt-3 ms-5'>
+  <nav aria-label='breadcrumb'>
+    <ol class='breadcrumb'>
+      <li class='breadcrumb-item'><%= link_to 'Home', root_path %></li>
+      <li class='breadcrumb-item active' aria-current='page'><%= @breadcrumb.title %></li>
+    </ol>
+  </nav>
+</div>
+<div class='container-fluid'>
+  <div id="products" class="row products">
+    <div class='row g-5 justify-content-center align-items-center vh-100 flex-wrap'>
+      <% @products.each do |product| %>
+        <%= render partial: 'products/product', locals: { product: product } %>
+      <% end %>
+    </div>
+  </div>
+</div>

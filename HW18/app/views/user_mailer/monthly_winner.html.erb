@@ -1,0 +1,6 @@
+<h2>Dear <%= @user.email %> </h2>
+<p>Congratulations, you’ve won the <%= number_to_currency(rand(20..50)) %> Wishpond Gift Card Prize
+  in our monthly lottery among our customers!</p>
+<p>Please, use this Wishpond Gift Card until <%= DateTime.now.to_date + 3.month %> </p>
+<h4>Grateful to Have You as a Customer!</h4>
+<h4><i>Dionysus Store Team</i></h4>
