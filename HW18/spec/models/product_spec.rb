@@ -5,11 +5,17 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   describe 'validations' do
     let(:product) { described_class.new }
+    # let(:product_2) { create(:product) }
 
     it 'should return errors' do
       product.valid?
       expect(product.errors[:name]).to eq(['can\'t be blank'])
     end
+
+    # it 'should have name, description and price' do
+    #   expect(product_2.name).not_to be nil
+    #   expect(product_2.description).not_to be nil
+    #   expect(product_2.price).not_to be nil
+    # end
   end
-  # pending "add some examples to (or delete) #{__FILE__}"
 end
